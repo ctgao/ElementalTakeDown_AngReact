@@ -1,0 +1,34 @@
+application {
+  config {
+    baseName elementaltakedown,
+    packageName ctgao.passion.elementaltakedown,
+    applicationType monolith,
+    prodDatabaseType mysql,
+  }
+  entities *
+}
+
+entity CharaCard {
+  name String required
+  element Elemental required
+  basic Damage
+  skill Damage
+  ultimate Damage
+}
+
+entity Damage {
+  description String required
+  dmgValue Integer required
+  dmgElement Elemental required
+}
+
+enum Elemental {
+  WATER
+  FIRE
+  ICE
+  PLANT
+  ELECTRIC
+  EARTH
+  WIND
+  NONE
+}
