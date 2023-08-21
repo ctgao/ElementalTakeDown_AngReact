@@ -8,21 +8,46 @@ application {
   entities *
 }
 
-entity CharaCard {
+entity CharacterCard {
   name String required
-  element Elemental required
-  basic Damage
-  skill Damage
-  ultimate Damage
+  element ElementType required
+}
+
+entity BasicATK {
+  name String
+}
+
+entity SkillATK {
+  name String
+  description String
+  // will later have bonus effects
+}
+
+entity UltimateATK {
+  name String
+  description String
+  requiredEnergy Integer required
 }
 
 entity Damage {
-  description String required
+  name String
   dmgValue Integer required
-  dmgElement Elemental required
+  dmgElement DmgElementType required
 }
 
-enum Elemental {
+relationship OneToOne {
+  CharacterCard{basic(name) required} to BasicATK
+  CharacterCard{skill(name) required} to SkillATK
+  CharacterCard{ultimate(name) required} to UltimateATK
+}
+
+relationship ManyToOne {
+  BasicATK{damage(name) required} to Damage
+  SkillATK{damage(name) required} to Damage
+  UltimateATK{damage(name) required} to Damage
+}
+
+enum ElementType {
   WATER
   FIRE
   ICE
@@ -30,5 +55,15 @@ enum Elemental {
   ELECTRIC
   EARTH
   WIND
-  NONE
+}
+
+enum DmgElementType {
+  WATER
+  FIRE
+  ICE
+  PLANT
+  ELECTRIC
+  EARTH
+  WIND
+  PHYSICAL
 }
