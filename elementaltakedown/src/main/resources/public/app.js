@@ -65,11 +65,22 @@ function showCharaCard(post) {
     let li = document.createElement('div');
     let title = document.createElement('h2');
     let body = document.createElement('p');
+    let basic = document.createElement('p');
+    let skill = document.createElement('p');
+    let ult = document.createElement('p');
+
     title.innerHTML = `${post.name}`;
     body.innerHTML = `${post.element}`;
 
+    basic.innerHTML = `${post.basic.name}`;
+    skill.innerHTML = `${post.skill.name}`;
+    ult.innerHTML = `${post.ultimate.name}`;
+
     li.appendChild(title);
     li.appendChild(body);
+    li.appendChild(basic);
+    li.appendChild(skill);
+    li.appendChild(ult);
     detail.appendChild(li);
 
     ul.appendChild(detail);
