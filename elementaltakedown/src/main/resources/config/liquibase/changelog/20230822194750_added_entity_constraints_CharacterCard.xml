@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity CharacterCard.
+    -->
+    <changeSet id="20230822194750-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="basic_id"
+                                 baseTableName="character_card"
+                                 constraintName="fk_character_card__basic_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="basic_atk"/>
+
+        <addForeignKeyConstraint baseColumnNames="skill_id"
+                                 baseTableName="character_card"
+                                 constraintName="fk_character_card__skill_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="skill_atk"/>
+
+        <addForeignKeyConstraint baseColumnNames="ultimate_id"
+                                 baseTableName="character_card"
+                                 constraintName="fk_character_card__ultimate_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ultimate_atk"/>
+    </changeSet>
+</databaseChangeLog>

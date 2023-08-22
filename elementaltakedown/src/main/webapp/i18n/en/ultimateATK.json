@@ -1,0 +1,27 @@
+{
+  "elementaltakedownApp": {
+    "ultimateATK": {
+      "home": {
+        "title": "Ultimate ATKS",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Ultimate ATK",
+        "createOrEditLabel": "Create or edit a Ultimate ATK",
+        "notFound": "No Ultimate ATKS found"
+      },
+      "created": "A new Ultimate ATK is created with identifier {{ param }}",
+      "updated": "A Ultimate ATK is updated with identifier {{ param }}",
+      "deleted": "A Ultimate ATK is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ultimate ATK {{ id }}?"
+      },
+      "detail": {
+        "title": "Ultimate ATK"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "requiredEnergy": "Required Energy",
+      "damage": "Damage"
+    }
+  }
+}

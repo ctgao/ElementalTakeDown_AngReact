@@ -1,0 +1,109 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-ultimate-atk-heading"
+        data-cy="UltimateATKCreateUpdateHeading"
+        jhiTranslate="elementaltakedownApp.ultimateATK.home.createOrEditLabel"
+      >
+        Create or edit a Ultimate ATK
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="elementaltakedownApp.ultimateATK.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="elementaltakedownApp.ultimateATK.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="elementaltakedownApp.ultimateATK.requiredEnergy" for="field_requiredEnergy"
+            >Required Energy</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="requiredEnergy"
+            id="field_requiredEnergy"
+            data-cy="requiredEnergy"
+            formControlName="requiredEnergy"
+          />
+          <div
+            *ngIf="
+              editForm.get('requiredEnergy')!.invalid && (editForm.get('requiredEnergy')!.dirty || editForm.get('requiredEnergy')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('requiredEnergy')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('requiredEnergy')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="elementaltakedownApp.ultimateATK.damage" for="field_damage">Damage</label>
+          <select
+            class="form-control"
+            id="field_damage"
+            data-cy="damage"
+            name="damage"
+            formControlName="damage"
+            [compareWith]="compareDamage"
+          >
+            <option *ngIf="!editForm.get('damage')!.value" [ngValue]="null" selected></option>
+            <option [ngValue]="damageOption" *ngFor="let damageOption of damagesSharedCollection">{{ damageOption.name }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['damage'])!.invalid && (editForm.get(['damage'])!.dirty || editForm.get(['damage'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['damage'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "elementaltakedownApp": {
+    "characterCard": {
+      "home": {
+        "title": "Character Cards",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Character Card",
+        "createOrEditLabel": "Create or edit a Character Card",
+        "notFound": "No Character Cards found"
+      },
+      "created": "A new Character Card is created with identifier {{ param }}",
+      "updated": "A Character Card is updated with identifier {{ param }}",
+      "deleted": "A Character Card is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Character Card {{ id }}?"
+      },
+      "detail": {
+        "title": "Character Card"
+      },
+      "id": "ID",
+      "name": "Name",
+      "element": "Element",
+      "basic": "Basic",
+      "skill": "Skill",
+      "ultimate": "Ultimate"
+    }
+  }
+}

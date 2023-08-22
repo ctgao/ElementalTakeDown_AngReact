@@ -1,0 +1,25 @@
+{
+  "elementaltakedownApp": {
+    "basicATK": {
+      "home": {
+        "title": "Basic ATKS",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Basic ATK",
+        "createOrEditLabel": "Create or edit a Basic ATK",
+        "notFound": "No Basic ATKS found"
+      },
+      "created": "A new Basic ATK is created with identifier {{ param }}",
+      "updated": "A Basic ATK is updated with identifier {{ param }}",
+      "deleted": "A Basic ATK is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Basic ATK {{ id }}?"
+      },
+      "detail": {
+        "title": "Basic ATK"
+      },
+      "id": "ID",
+      "name": "Name",
+      "damage": "Damage"
+    }
+  }
+}

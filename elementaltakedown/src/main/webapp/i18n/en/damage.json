@@ -1,0 +1,26 @@
+{
+  "elementaltakedownApp": {
+    "damage": {
+      "home": {
+        "title": "Damages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Damage",
+        "createOrEditLabel": "Create or edit a Damage",
+        "notFound": "No Damages found"
+      },
+      "created": "A new Damage is created with identifier {{ param }}",
+      "updated": "A Damage is updated with identifier {{ param }}",
+      "deleted": "A Damage is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Damage {{ id }}?"
+      },
+      "detail": {
+        "title": "Damage"
+      },
+      "id": "ID",
+      "name": "Name",
+      "dmgValue": "Dmg Value",
+      "dmgElement": "Dmg Element"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "applications": ["elementaltakedown"],
+  "changelogDate": "20230822194750",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "character_card",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "element",
+      "fieldType": "ElementType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "WATER,FIRE,ICE,PLANT,ELECTRIC,EARTH,WIND"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CharacterCard",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "basicATK",
+      "ownerSide": true,
+      "relationshipName": "basic",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "skillATK",
+      "ownerSide": true,
+      "relationshipName": "skill",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "ultimateATK",
+      "ownerSide": true,
+      "relationshipName": "ultimate",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "no"
+}
