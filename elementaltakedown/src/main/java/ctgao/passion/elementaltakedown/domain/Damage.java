@@ -51,6 +51,9 @@ public class Damage implements Serializable {
     }
 
     public String getName() {
+        if(this.dmgValue == 0) {
+            return "No Damage";
+        }
         return this.dmgElement.getValue() + this.dmgValue;
     }
 
