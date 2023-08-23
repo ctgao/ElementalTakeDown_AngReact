@@ -1,0 +1,15 @@
+{
+  "elementaltakedownApp": {
+    "DmgElementType": {
+      "null": "",
+      "WATER": "Water",
+      "FIRE": "Fire",
+      "ICE": "Ice",
+      "PLANT": "Plant",
+      "ELECTRIC": "Electric",
+      "EARTH": "Earth",
+      "WIND": "Wind",
+      "PHYSICAL": "Physical"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "applications": ["elementaltakedown"],
+  "changelogDate": "20230822194751",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "basic_atk",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "BasicATK",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "damage",
+      "relationshipName": "damage",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "no"
+}

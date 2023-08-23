@@ -1,0 +1,32 @@
+{
+  "applications": ["elementaltakedown"],
+  "changelogDate": "20230822194752",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "skill_atk",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "SkillATK",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "damage",
+      "relationshipName": "damage",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "no"
+}

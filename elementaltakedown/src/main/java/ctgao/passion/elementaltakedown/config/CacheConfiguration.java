@@ -48,6 +48,11 @@ public class CacheConfiguration {
             createCache(cm, ctgao.passion.elementaltakedown.domain.User.class.getName());
             createCache(cm, ctgao.passion.elementaltakedown.domain.Authority.class.getName());
             createCache(cm, ctgao.passion.elementaltakedown.domain.User.class.getName() + ".authorities");
+            createCache(cm, ctgao.passion.elementaltakedown.domain.CharacterCard.class.getName());
+            createCache(cm, ctgao.passion.elementaltakedown.domain.BasicATK.class.getName());
+            createCache(cm, ctgao.passion.elementaltakedown.domain.SkillATK.class.getName());
+            createCache(cm, ctgao.passion.elementaltakedown.domain.UltimateATK.class.getName());
+            createCache(cm, ctgao.passion.elementaltakedown.domain.Damage.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

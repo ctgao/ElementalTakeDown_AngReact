@@ -58,12 +58,12 @@ enum ElementType {
 }
 
 enum DmgElementType {
-  WATER
-  FIRE
-  ICE
-  PLANT
-  ELECTRIC
-  EARTH
-  WIND
-  PHYSICAL
+  WATER("Water")
+  FIRE("Fire")
+  ICE("Ice")
+  PLANT("Plant")
+  ELECTRIC("Electric")
+  EARTH("Earth")
+  WIND("Wind")
+  PHYSICAL("Physical")
 }

@@ -17,7 +17,16 @@
     <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230822194750_added_entity_CharacterCard.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230822194751_added_entity_BasicATK.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230822194752_added_entity_SkillATK.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230822194753_added_entity_UltimateATK.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230822194754_added_entity_Damage.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20230822194750_added_entity_constraints_CharacterCard.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230822194751_added_entity_constraints_BasicATK.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230822194752_added_entity_constraints_SkillATK.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230822194753_added_entity_constraints_UltimateATK.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>
