@@ -128,6 +128,9 @@ public class BasicATKResource {
                 if (basicATK.getName() != null) {
                     existingBasicATK.setName(basicATK.getName());
                 }
+                if (basicATK.getDescription() != null) {
+                    existingBasicATK.setDescription(basicATK.getDescription());
+                }
 
                 return existingBasicATK;
             })

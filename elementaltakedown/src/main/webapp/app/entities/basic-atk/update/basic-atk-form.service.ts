@@ -19,6 +19,7 @@ type BasicATKFormDefaults = Pick<NewBasicATK, 'id'>;
 type BasicATKFormGroupContent = {
   id: FormControl<IBasicATK['id'] | NewBasicATK['id']>;
   name: FormControl<IBasicATK['name']>;
+  description: FormControl<IBasicATK['description']>;
   damage: FormControl<IBasicATK['damage']>;
 };
 
@@ -40,6 +41,7 @@ export class BasicATKFormService {
         }
       ),
       name: new FormControl(basicATKRawValue.name),
+      description: new FormControl(basicATKRawValue.description),
       damage: new FormControl(basicATKRawValue.damage, {
         validators: [Validators.required],
       }),

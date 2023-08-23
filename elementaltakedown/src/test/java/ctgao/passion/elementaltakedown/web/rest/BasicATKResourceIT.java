@@ -42,6 +42,9 @@ class BasicATKResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/basic-atks";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -69,7 +72,7 @@ class BasicATKResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static BasicATK createEntity(EntityManager em) {
-        BasicATK basicATK = new BasicATK().name(DEFAULT_NAME);
+        BasicATK basicATK = new BasicATK().name(DEFAULT_NAME).description(DEFAULT_DESCRIPTION);
         // Add required entity
         Damage damage;
         if (TestUtil.findAll(em, Damage.class).isEmpty()) {
@@ -90,7 +93,7 @@ class BasicATKResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static BasicATK createUpdatedEntity(EntityManager em) {
-        BasicATK basicATK = new BasicATK().name(UPDATED_NAME);
+        BasicATK basicATK = new BasicATK().name(UPDATED_NAME).description(UPDATED_DESCRIPTION);
         // Add required entity
         Damage damage;
         if (TestUtil.findAll(em, Damage.class).isEmpty()) {
@@ -123,6 +126,7 @@ class BasicATKResourceIT {
         assertThat(basicATKList).hasSize(databaseSizeBeforeCreate + 1);
         BasicATK testBasicATK = basicATKList.get(basicATKList.size() - 1);
         assertThat(testBasicATK.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testBasicATK.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
     @Test
@@ -155,7 +159,8 @@ class BasicATKResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(basicATK.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -187,7 +192,8 @@ class BasicATKResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(basicATK.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
 
     @Test
@@ -209,7 +215,7 @@ class BasicATKResourceIT {
         BasicATK updatedBasicATK = basicATKRepository.findById(basicATK.getId()).get();
         // Disconnect from session so that the updates on updatedBasicATK are not directly saved in db
         em.detach(updatedBasicATK);
-        updatedBasicATK.name(UPDATED_NAME);
+        updatedBasicATK.name(UPDATED_NAME).description(UPDATED_DESCRIPTION);
 
         restBasicATKMockMvc
             .perform(
@@ -224,6 +230,7 @@ class BasicATKResourceIT {
         assertThat(basicATKList).hasSize(databaseSizeBeforeUpdate);
         BasicATK testBasicATK = basicATKList.get(basicATKList.size() - 1);
         assertThat(testBasicATK.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testBasicATK.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test
@@ -294,7 +301,7 @@ class BasicATKResourceIT {
         BasicATK partialUpdatedBasicATK = new BasicATK();
         partialUpdatedBasicATK.setId(basicATK.getId());
 
-        partialUpdatedBasicATK.name(UPDATED_NAME);
+        partialUpdatedBasicATK.name(UPDATED_NAME).description(UPDATED_DESCRIPTION);
 
         restBasicATKMockMvc
             .perform(
@@ -309,6 +316,7 @@ class BasicATKResourceIT {
         assertThat(basicATKList).hasSize(databaseSizeBeforeUpdate);
         BasicATK testBasicATK = basicATKList.get(basicATKList.size() - 1);
         assertThat(testBasicATK.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testBasicATK.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test
@@ -323,7 +331,7 @@ class BasicATKResourceIT {
         BasicATK partialUpdatedBasicATK = new BasicATK();
         partialUpdatedBasicATK.setId(basicATK.getId());
 
-        partialUpdatedBasicATK.name(UPDATED_NAME);
+        partialUpdatedBasicATK.name(UPDATED_NAME).description(UPDATED_DESCRIPTION);
 
         restBasicATKMockMvc
             .perform(
@@ -338,6 +346,7 @@ class BasicATKResourceIT {
         assertThat(basicATKList).hasSize(databaseSizeBeforeUpdate);
         BasicATK testBasicATK = basicATKList.get(basicATKList.size() - 1);
         assertThat(testBasicATK.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testBasicATK.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test

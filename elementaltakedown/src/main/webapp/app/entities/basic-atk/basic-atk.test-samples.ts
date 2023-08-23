@@ -5,12 +5,14 @@ export const sampleWithRequiredData: IBasicATK = {
 };
 
 export const sampleWithPartialData: IBasicATK = {
-  id: 57430,
+  id: 76481,
+  description: 'compressing green',
 };
 
 export const sampleWithFullData: IBasicATK = {
-  id: 76481,
-  name: 'compressing green',
+  id: 92552,
+  name: 'Handmade auxiliary withdrawal',
+  description: 'impactful Ergonomic Executive',
 };
 
 export const sampleWithNewData: NewBasicATK = {

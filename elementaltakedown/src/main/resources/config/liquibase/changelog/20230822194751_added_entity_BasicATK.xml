@@ -10,11 +10,15 @@
         Added the entity BasicATK.
     -->
     <changeSet id="20230822194751-1" author="jhipster">
+        <validCheckSum>8:74a1f7e0f943207c27f9bd9f90c61c35</validCheckSum>
         <createTable tableName="basic_atk">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="damage_id" type="bigint">
@@ -35,6 +39,7 @@
           Spring Boot configuration key.
     -->
     <changeSet id="20230822194751-1-data" author="jhipster" context="faker">
+        <validCheckSum>8:2c03bb641a3d0233d15bad9e65fac2a8</validCheckSum>
         <loadData
                   file="config/liquibase/fake-data/basic_atk.csv"
                   separator=";"
@@ -42,6 +47,7 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
+            <column name="description" type="string"/>
             <column name="damage_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

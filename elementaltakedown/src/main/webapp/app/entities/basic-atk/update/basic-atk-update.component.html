@@ -23,6 +23,18 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" jhiTranslate="elementaltakedownApp.basicATK.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" jhiTranslate="elementaltakedownApp.basicATK.damage" for="field_damage">Damage</label>
           <select
             class="form-control"

@@ -21,6 +21,7 @@ describe('BasicATK Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             name: expect.any(Object),
+            description: expect.any(Object),
             damage: expect.any(Object),
           })
         );
@@ -33,6 +34,7 @@ describe('BasicATK Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             name: expect.any(Object),
+            description: expect.any(Object),
             damage: expect.any(Object),
           })
         );
