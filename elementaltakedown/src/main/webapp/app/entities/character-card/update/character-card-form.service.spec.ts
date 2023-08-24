@@ -25,6 +25,7 @@ describe('CharacterCard Form Service', () => {
             basic: expect.any(Object),
             skill: expect.any(Object),
             ultimate: expect.any(Object),
+            owners: expect.any(Object),
           })
         );
       });
@@ -40,6 +41,7 @@ describe('CharacterCard Form Service', () => {
             basic: expect.any(Object),
             skill: expect.any(Object),
             ultimate: expect.any(Object),
+            owners: expect.any(Object),
           })
         );
       });

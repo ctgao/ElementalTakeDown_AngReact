@@ -5,7 +5,7 @@ body {
     max-width: 50rem;
     padding: 2rem;
     margin: auto;
-    background: #adadad;
+    background-color: #fafafa;
 }
 
 img {
@@ -14,32 +14,38 @@ img {
 
 .fire {
     color: #fc3535;
+    text-shadow: -1px 0 #801418, 0 1px #801418, 1px 0 #801418, 0 -1px #801418;
 }
 .water {
     color: #2b2efc;
+    text-shadow: -1px 0 #13166B, 0 1px #13166B, 1px 0 #13166B, 0 -1px #13166B;
 }
 .ice {
     color: #35f9fc;
+    text-shadow: -1px 0 #00969B, 0 1px #00969B, 1px 0 #00969B, 0 -1px #00969B;
 }
 .earth {
     color: #ffd814;
+    text-shadow: -1px 0 #B39812, 0 1px #B39812, 1px 0 #B39812, 0 -1px #B39812;
 }
 .electric {
-    color: #9e17ff;
+    color: #A61FFF;
+    text-shadow: -1px 0 #66109F, 0 1px #66109F, 1px 0 #66109F, 0 -1px #66109F;
 }
 .plant {
     color: #2dfc46;
+    text-shadow: -1px 0 #1DA930, 0 1px #1DA930, 1px 0 #1DA930, 0 -1px #1DA930;
 }
 .wind {
     color: #57ffb9;
+    text-shadow: -1px 0 #3CAF81, 0 1px #3CAF81, 1px 0 #3CAF81, 0 -1px #3CAF81;
 }
 
 a {
     color: #2e8acc;
 }
 
-h1,
-strong {
+.maintitle {
     color: #91167f;
 }
 

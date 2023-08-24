@@ -1,20 +1,21 @@
 package ctgao.passion.elementaltakedown.domain;
 
-import ctgao.passion.elementaltakedown.domain.enumeration.DmgElementType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * A Damage.
+ * A UserProfile.
  */
 @Entity
-@Table(name = "damage")
+@Table(name = "user_profile")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class Damage implements Serializable {
+public class UserProfile implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,14 +27,15 @@ public class Damage implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @NotNull
-    @Column(name = "dmg_value", nullable = false)
-    private Integer dmgValue;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "dmg_element", nullable = false)
-    private DmgElementType dmgElement;
+    @ManyToMany
+    @JoinTable(
+        name = "rel_user_profile__cards",
+        joinColumns = @JoinColumn(name = "user_profile_id"),
+        inverseJoinColumns = @JoinColumn(name = "cards_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "basic", "skill", "ultimate", "owners" }, allowSetters = true)
+    private Set<CharacterCard> cards = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -41,7 +43,7 @@ public class Damage implements Serializable {
         return this.id;
     }
 
-    public Damage id(Long id) {
+    public UserProfile id(Long id) {
         this.setId(id);
         return this;
     }
@@ -51,16 +53,10 @@ public class Damage implements Serializable {
     }
 
     public String getName() {
-        if(this.dmgValue < 0) {
-            return "Heal" + (-1 * this.dmgValue);
-        }
-        if(this.dmgValue == 0) {
-            return "No Damage";
-        }
-        return this.dmgElement.getValue() + this.dmgValue;
+        return this.name;
     }
 
-    public Damage name(String name) {
+    public UserProfile name(String name) {
         this.setName(name);
         return this;
     }
@@ -69,30 +65,29 @@ public class Damage implements Serializable {
         this.name = name;
     }
 
-    public Integer getDmgValue() {
-        return this.dmgValue;
+    public Set<CharacterCard> getCards() {
+        return this.cards;
     }
 
-    public Damage dmgValue(Integer dmgValue) {
-        this.setDmgValue(dmgValue);
+    public void setCards(Set<CharacterCard> characterCards) {
+        this.cards = characterCards;
+    }
+
+    public UserProfile cards(Set<CharacterCard> characterCards) {
+        this.setCards(characterCards);
         return this;
     }
 
-    public void setDmgValue(Integer dmgValue) {
-        this.dmgValue = dmgValue;
-    }
-
-    public DmgElementType getDmgElement() {
-        return this.dmgElement;
-    }
-
-    public Damage dmgElement(DmgElementType dmgElement) {
-        this.setDmgElement(dmgElement);
+    public UserProfile addCards(CharacterCard characterCard) {
+        this.cards.add(characterCard);
+        characterCard.getOwners().add(this);
         return this;
     }
 
-    public void setDmgElement(DmgElementType dmgElement) {
-        this.dmgElement = dmgElement;
+    public UserProfile removeCards(CharacterCard characterCard) {
+        this.cards.remove(characterCard);
+        characterCard.getOwners().remove(this);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -102,10 +97,10 @@ public class Damage implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Damage)) {
+        if (!(o instanceof UserProfile)) {
             return false;
         }
-        return id != null && id.equals(((Damage) o).id);
+        return id != null && id.equals(((UserProfile) o).id);
     }
 
     @Override
@@ -117,11 +112,9 @@ public class Damage implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "Damage{" +
+        return "UserProfile{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", dmgValue=" + getDmgValue() +
-            ", dmgElement='" + getDmgElement() + "'" +
             "}";
     }
 }

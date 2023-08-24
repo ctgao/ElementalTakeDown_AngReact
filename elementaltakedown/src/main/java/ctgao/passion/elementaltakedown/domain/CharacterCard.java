@@ -3,6 +3,8 @@ package ctgao.passion.elementaltakedown.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ctgao.passion.elementaltakedown.domain.enumeration.ElementType;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -50,6 +52,11 @@ public class CharacterCard implements Serializable {
     @NotNull
     @JoinColumn(unique = true)
     private UltimateATK ultimate;
+
+    @ManyToMany(mappedBy = "cards")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "cards" }, allowSetters = true)
+    private Set<UserProfile> owners = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -128,6 +135,37 @@ public class CharacterCard implements Serializable {
 
     public CharacterCard ultimate(UltimateATK ultimateATK) {
         this.setUltimate(ultimateATK);
+        return this;
+    }
+
+    public Set<UserProfile> getOwners() {
+        return this.owners;
+    }
+
+    public void setOwners(Set<UserProfile> userProfiles) {
+        if (this.owners != null) {
+            this.owners.forEach(i -> i.removeCards(this));
+        }
+        if (userProfiles != null) {
+            userProfiles.forEach(i -> i.addCards(this));
+        }
+        this.owners = userProfiles;
+    }
+
+    public CharacterCard owners(Set<UserProfile> userProfiles) {
+        this.setOwners(userProfiles);
+        return this;
+    }
+
+    public CharacterCard addOwners(UserProfile userProfile) {
+        this.owners.add(userProfile);
+        userProfile.getCards().add(this);
+        return this;
+    }
+
+    public CharacterCard removeOwners(UserProfile userProfile) {
+        this.owners.remove(userProfile);
+        userProfile.getCards().remove(this);
         return this;
     }
 

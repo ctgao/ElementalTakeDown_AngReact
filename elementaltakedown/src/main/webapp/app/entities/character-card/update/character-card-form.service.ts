@@ -14,7 +14,7 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type CharacterCardFormGroupInput = ICharacterCard | PartialWithRequiredKeyOf<NewCharacterCard>;
 
-type CharacterCardFormDefaults = Pick<NewCharacterCard, 'id'>;
+type CharacterCardFormDefaults = Pick<NewCharacterCard, 'id' | 'owners'>;
 
 type CharacterCardFormGroupContent = {
   id: FormControl<ICharacterCard['id'] | NewCharacterCard['id']>;
@@ -23,6 +23,7 @@ type CharacterCardFormGroupContent = {
   basic: FormControl<ICharacterCard['basic']>;
   skill: FormControl<ICharacterCard['skill']>;
   ultimate: FormControl<ICharacterCard['ultimate']>;
+  owners: FormControl<ICharacterCard['owners']>;
 };
 
 export type CharacterCardFormGroup = FormGroup<CharacterCardFormGroupContent>;
@@ -57,6 +58,7 @@ export class CharacterCardFormService {
       ultimate: new FormControl(characterCardRawValue.ultimate, {
         validators: [Validators.required],
       }),
+      owners: new FormControl(characterCardRawValue.owners ?? []),
     });
   }
 
@@ -77,6 +79,7 @@ export class CharacterCardFormService {
   private getFormDefaults(): CharacterCardFormDefaults {
     return {
       id: null,
+      owners: [],
     };
   }
 }
