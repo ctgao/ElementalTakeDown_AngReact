@@ -4,11 +4,11 @@ const API_URL = `http://localhost:8080`
 function fetchAllCharaCards() {
     fetch(`${API_URL}/api/character-cards`)
         .then((res) => {
-            console.log("res is ", Object.prototype.toString.call(res));
+//            console.log("res is ", Object.prototype.toString.call(res));
             return res.json();
         })
         .then((data) => {
-            showCharaCardList(data)
+            showCharaCardList(data);
         })
         .catch((error) => {
             console.log(`Error Fetching data : ${error}`)
@@ -20,7 +20,7 @@ function fetchAllCharaCards() {
 function fetchCharaCard(charaCardId) {
     fetch(`${API_URL}/api/character-cards/${charaCardId}`)
         .then((res) => {
-            console.log("res is ", Object.prototype.toString.call(res));
+//            console.log("res is ", Object.prototype.toString.call(res));
             return res.json();
         })
         .then((data) => {
@@ -28,7 +28,7 @@ function fetchCharaCard(charaCardId) {
         })
         .catch((error) => {
             console.log(`Error Fetching data : ${error}`)
-            document.getElementById('posts').innerHTML = 'Error Loading Single Character Card'
+            document.getElementById('post').innerHTML = 'Error Loading Single Character Card'
         })
 }
 
@@ -64,26 +64,123 @@ function showCharaCard(post) {
     console.log("Character Card:", post);
     let li = document.createElement('div');
     let title = document.createElement('h2');
+    title.className = post.element.toLowerCase();
     let body = document.createElement('p');
-    let basic = document.createElement('p');
-    let skill = document.createElement('p');
-    let ult = document.createElement('p');
+    body.className = post.element.toLowerCase();
+    let basic = document.createElement('div');
+    basic.id = 'basicatk';
+    let skill = document.createElement('div');
+    skill.id = 'skillatk';
+    let ult = document.createElement('div');
+    ult.id = 'ultatk';
 
     title.innerHTML = `${post.name}`;
-    body.innerHTML = `${post.element}`;
-
-    basic.innerHTML = `${post.basic.name}`;
-    skill.innerHTML = `${post.skill.name}`;
-    ult.innerHTML = `${post.ultimate.name}`;
+    body.innerHTML = `&emsp;Element: ${post.element}`;
+    fetchBasic(post.basic.id);
+    fetchSkill(post.skill.id);
+    fetchUlt(post.ultimate.id);
 
     li.appendChild(title);
     li.appendChild(body);
     li.appendChild(basic);
     li.appendChild(skill);
     li.appendChild(ult);
+
     detail.appendChild(li);
 
     ul.appendChild(detail);
+}
+
+function fetchBasic(atkId) {
+    fetch(`${API_URL}/api/basic-atks/${atkId}`)
+        .then((res) => {
+//            console.log("res is ", Object.prototype.toString.call(res));
+            return res.json();
+        })
+        .then((data) => {
+            showBasicDetail(data)
+        })
+        .catch((error) => {
+            console.log(`Error Fetching data : ${error}`)
+            document.getElementById('post').innerHTML = 'Error Loading Basic ATK data'
+        })
+}
+
+function showBasicDetail(post1) {
+    console.log("Basic ATK:", post1);
+
+    let li1 = document.getElementById('basicatk');
+    let title1 = document.createElement('h3');
+    let desc1 = document.createElement('p');
+
+    title1.innerHTML = `${post1.name}`;
+    desc1.innerHTML = `&emsp;Deals ${post1.damage.dmgValue} ${post1.damage.dmgElement} Damage`;
+    let output = DmgElementType[post1.damage.dmgElement];
+    console.log(`DmgElementType ${output}`);
+
+    li1.appendChild(title1);
+    li1.appendChild(desc1);
+}
+
+function fetchSkill(atkId) {
+    fetch(`${API_URL}/api/skill-atks/${atkId}`)
+        .then((res) => {
+//            console.log("res is ", Object.prototype.toString.call(res));
+            return res.json();
+        })
+        .then((data) => {
+            showSkillDetail(data)
+        })
+        .catch((error) => {
+            console.log(`Error Fetching data : ${error}`)
+            document.getElementById('post').innerHTML = 'Error Loading Skill ATK data'
+        })
+}
+
+function showSkillDetail(post2){
+    console.log("Skill ATK:", post2);
+
+    let li2 = document.getElementById('skillatk');
+    let title2 = document.createElement('h3');
+    let desc2 = document.createElement('p');
+
+    title2.innerHTML = `${post2.name}`;
+    desc2.innerHTML = `&emsp;${post2.description}`;
+
+    li2.appendChild(title2);
+    li2.appendChild(desc2);
+}
+
+function fetchUlt(atkId) {
+    fetch(`${API_URL}/api/ultimate-atks/${atkId}`)
+        .then((res) => {
+//            console.log("res is ", Object.prototype.toString.call(res));
+            return res.json();
+        })
+        .then((data) => {
+            showUltDetail(data)
+        })
+        .catch((error) => {
+            console.log(`Error Fetching data : ${error}`)
+            document.getElementById('posts').innerHTML = 'Error Loading Ultimate ATK data'
+        })
+}
+
+function showUltDetail(post3){
+    console.log("Ultimate ATK:", post3);
+
+    let li3 = document.getElementById('ultatk');
+    let title3 = document.createElement('h3');
+    let desc3 = document.createElement('p');
+    let cost3 = document.createElement('p');
+
+    title3.innerHTML = `${post3.name}`;
+    cost3.innerHTML = `&emsp;Required Energy: ${post3.requiredEnergy}`;
+    desc3.innerHTML = `&emsp;${post3.description}`;
+
+    li3.appendChild(title3);
+    li3.appendChild(cost3);
+    li3.appendChild(desc3);
 }
 
 function parseCardId() {

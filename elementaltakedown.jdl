@@ -15,6 +15,7 @@ entity CharacterCard {
 
 entity BasicATK {
   name String
+  description String
 }
 
 entity SkillATK {
@@ -46,6 +47,10 @@ relationship ManyToOne {
   SkillATK{damage(name) required} to Damage
   UltimateATK{damage(name) required} to Damage
 }
+
+//relationship ManyToMany {
+//  CharacterCard{owners(login)} to User{cards}
+//}
 
 enum ElementType {
   WATER

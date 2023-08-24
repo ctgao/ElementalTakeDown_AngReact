@@ -12,13 +12,34 @@ img {
     max-width: 100%;
 }
 
+.fire {
+    color: #fc3535;
+}
+.water {
+    color: #2b2efc;
+}
+.ice {
+    color: #35f9fc;
+}
+.earth {
+    color: #ffd814;
+}
+.electric {
+    color: #9e17ff;
+}
+.plant {
+    color: #2dfc46;
+}
+.wind {
+    color: #57ffb9;
+}
+
 a {
     color: #2e8acc;
 }
 
 h1,
-h2,
 strong {
-    color: #0fab04;
+    color: #91167f;
 }
 
