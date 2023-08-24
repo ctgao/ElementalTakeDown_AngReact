@@ -8,6 +8,10 @@ application {
   entities *
 }
 
+entity UserProfile {
+  name String
+}
+
 entity CharacterCard {
   name String required
   element ElementType required
@@ -48,9 +52,9 @@ relationship ManyToOne {
   UltimateATK{damage(name) required} to Damage
 }
 
-//relationship ManyToMany {
-//  CharacterCard{owners(login)} to User{cards}
-//}
+relationship ManyToMany {
+  UserProfile{cards} to CharacterCard{owners}
+}
 
 enum ElementType {
   WATER
