@@ -1,44 +1,110 @@
-const API_URL = `http://localhost:8080`
+const API_URL = `http://localhost:8080/api`
 
-function doPostOfForm() {
+const form = document.getElementById("add-chara-form");
+
+async function parseForm() {
+    // get the 3 jsons
+    const basicJSON = await parseBasicATK();
+    const skillJSON = await parseSkill();
+    const ultimateJSON = await parseUlt();
+
     const formData = new FormData(form);
+    var dataToSend = {};
 
-    //adding things into the form to resolve requirements
-    formData.append("basic-id", 1);
-    formData.append("skill-id", 1);
-    formData.append("ultimate-id", 1);
+    dataToSend["name"] = formData.get("name");
+//    console.log("name of character: " + formData.get("name"));
+    dataToSend["element"] = formData.get("element");
+//    console.log("element of character: " + formData.get("element"));
+    dataToSend["basic"] = basicJSON;
+    dataToSend["skill"] = skillJSON;
+    dataToSend["ultimate"] = ultimateJSON;
 
-    console.log("lets go form data whoo");
-    // Display the values
-    for (const value of formData.values()) {
-      console.log(value);
-    }
-
-    postJSON(formData)
+    postJSON(dataToSend, `${API_URL}/character-cards`);
     return false;
 }
 
-async function postJSON(data) {
-    // CURRENT BUG
-//     "JSON parse error: Unexpected character ('-' (code 45)) in numeric value: expected digit (0-9) to follow minus sign, for valid numeri…"
-//    DUNNO why we're getting this parsing error, nothing should have a dash except for maybe ???
-// the basics???? HUMMMMM
+function parseDamage(type){
+    var dataToSend = {};
 
+    dataToSend["dmgValue"] = document.getElementById(`${type}dmgValue`).value;
+//    console.log(`${type}damage value: ` + dataToSend["dmgValue"]);
+    dataToSend["dmgElement"] = document.getElementById(`${type}dmgElement`).value;
+//    console.log(`${type}damage element: ` + dataToSend["dmgElement"]);
+
+    return postJSON(dataToSend, `${API_URL}/damages`);
+//    return null;
+}
+
+async function parseBasicATK(){
+    var dataToSend = {};
+
+    const damageJSON = await parseDamage("basic-");
+
+    dataToSend["name"] = document.getElementById("basic-name").value;
+//    console.log("name of basic: " + dataToSend["name"]);
+    dataToSend["description"] = document.getElementById("basic-desc").value;
+//    console.log("description of basic: " + dataToSend["description"]);
+    dataToSend["damage"] = damageJSON;
+
+    var resultingJSON = await postJSON(dataToSend, `${API_URL}/basic-atks`);
+    delete resultingJSON.damage;
+//    console.log(resultingJSON);
+
+    return resultingJSON;
+}
+
+async function parseSkill(){
+    var dataToSend = {};
+
+    const damageJSON = await parseDamage("skill-");
+
+    dataToSend["name"] = document.getElementById("skill-name").value;
+//    console.log("name of skill: " + dataToSend["name"]);
+    dataToSend["description"] = document.getElementById("skill-desc").value;
+//    console.log("description of skill: " + dataToSend["description"]);
+    dataToSend["damage"] = damageJSON;
+
+    var resultingJSON = await postJSON(dataToSend, `${API_URL}/skill-atks`);
+    delete resultingJSON.damage;
+//    console.log(resultingJSON);
+
+    return resultingJSON;
+}
+
+async function parseUlt(){
+    var dataToSend = {};
+
+    const damageJSON = await parseDamage("ultimate-");
+
+    dataToSend["name"] = document.getElementById("ultimate-name").value;
+//    console.log("name of ultimate: " + dataToSend["name"]);
+    dataToSend["description"] = document.getElementById("ultimate-desc").value;
+//    console.log("description of ultimate: " + dataToSend["ultimate"]);
+    dataToSend["requiredEnergy"] = document.getElementById("ultimate-energy").value;
+//    console.log("required energy for ultimate: " + dataToSend["requiredEnergy"]);
+    dataToSend["damage"] = damageJSON;
+
+    var resultingJSON = await postJSON(dataToSend, `${API_URL}/ultimate-atks`);
+    delete resultingJSON.damage;
+//    console.log(resultingJSON);
+
+    return resultingJSON;
+}
+
+async function postJSON(data, urlToPostTo) {
     try {
-      const response = await fetch(`${API_URL}/api/character-cards`, {
+      const response = await fetch(urlToPostTo, {
         method: "POST", // or 'PUT'
         headers: {
-//          "Content-Type": "application/json",
-            "Content-type": "application/json; charset=UTF-8"
+          "Content-Type": "application/json",
         },
-        body: data,
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
       console.log("Success:", result);
+      return result;
     } catch (error) {
       console.error("Error:", error);
     }
 }
-
-const form = document.getElementById("add-chara-form");

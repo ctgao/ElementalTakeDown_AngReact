@@ -13,6 +13,7 @@
     <h1 class="maintitle">Elemental Take Down: Add New Character Card</h1>
     <section id="section">
         <form id="add-chara-form">
+<!--          <fieldset id="generic">-->
             <label for="name">Name of Character:</label><br>
             <input type="text" id="name" name="name" required><br>
 
@@ -26,8 +27,78 @@
               <option>PLANT</option>
               <option>WIND</option>
             </select>
+            </br></br>
+<!--          </fieldset>-->
 
-            <input type="button" onclick="doPostOfForm()" value="Add Character Card"/>
+          <fieldset id="basic">
+            <legend>Basic Attack Info</legend>
+            <label for="basic-name">Name of Basic:</label><br>
+            <input type="text" id="basic-name" name="name" required><br>
+            <label for="basic-desc">Description of Basic:</label><br>
+            <input type="text" id="basic-desc" name="description" required><br>
+            <label for="basic-dmgValue">Damage Value:</label><br>
+            <input type="text" id="basic-dmgValue" name="dmgValue" required><br>
+            <label for="basic-dmgElement">Damage Element:</label><br>
+            <select id="basic-dmgElement" name="dmgElement">
+              <option>FIRE</option>
+              <option>ICE</option>
+              <option>WATER</option>
+              <option>EARTH</option>
+              <option>ELECTRIC</option>
+              <option>PLANT</option>
+              <option>WIND</option>
+              <option>PHYSICAL</option>
+            </select>
+          </fieldset>
+          </br>
+
+          <fieldset id="skill">
+            <legend>Skill Attack Info</legend>
+            <label for="skill-name">Name of Skill:</label><br>
+            <input type="text" id="skill-name" name="name" required><br>
+            <label for="skill-desc">Description of Skill:</label><br>
+            <input type="text" id="skill-desc" name="description" required><br>
+            <label for="skill-dmgValue">Damage Value:</label><br>
+            <input type="text" id="skill-dmgValue" name="dmgValue" required><br>
+            <label for="skill-dmgElement">Damage Element:</label><br>
+            <select id="skill-dmgElement" name="dmgElement">
+              <option>FIRE</option>
+              <option>ICE</option>
+              <option>WATER</option>
+              <option>EARTH</option>
+              <option>ELECTRIC</option>
+              <option>PLANT</option>
+              <option>WIND</option>
+              <option>PHYSICAL</option>
+            </select>
+          </fieldset>
+          </br>
+
+          <fieldset id="ultimate">
+            <legend>Ultimate Attack Info</legend>
+            <label for="ultimate-name">Name of Ultimate:</label><br>
+            <input type="text" id="ultimate-name" name="name" required><br>
+            <label for="ultimate-desc">Description of Ultimate:</label><br>
+            <input type="text" id="ultimate-desc" name="description" required><br>
+            <label for="ultimate-energy">Ulimate Energy Cost:</label><br>
+            <input type="text" id="ultimate-energy" name="requiredEnergy" required><br>
+            <label for="ultimate-dmgValue">Damage Value:</label><br>
+            <input type="text" id="ultimate-dmgValue" name="dmgValue" required><br>
+            <label for="ultimate-dmgElement">Damage Element:</label><br>
+            <select id="ultimate-dmgElement" name="dmgElement">
+              <option>FIRE</option>
+              <option>ICE</option>
+              <option>WATER</option>
+              <option>EARTH</option>
+              <option>ELECTRIC</option>
+              <option>PLANT</option>
+              <option>WIND</option>
+              <option>PHYSICAL</option>
+            </select>
+          </fieldset>
+          </br>
+
+          <input type="button" onclick="parseForm()" value="Add Character Card"/>
         </form>
     </section>
 </body>
