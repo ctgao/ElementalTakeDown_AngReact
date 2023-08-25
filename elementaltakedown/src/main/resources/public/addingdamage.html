@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Add Damage</title>
+    <link rel="stylesheet" href="./koley.css?v=1">
+    <script src="./addingdmg.js" async defer></script>
+</head>
+
+<body>
+    <h1 class="maintitle">Elemental Take Down: Add New Damage</h1>
+    <section id="section">
+        <form id="add-dmg-form">
+            <label for="dmgValue">Damage Value:</label><br>
+            <input type="text" id="dmgValue" name="dmgValue" required><br>
+
+            <label for="dmgElement">Element:</label><br>
+            <select id="dmgElement" name="dmgElement">
+                <option>FIRE</option>
+                <option>ICE</option>
+                <option>WATER</option>
+                <option>EARTH</option>
+                <option>ELECTRIC</option>
+                <option>PLANT</option>
+                <option>WIND</option>
+                <option>PHYSICAL</option>
+            </select>
+
+            <input type="button" onclick="doPostOfForm()" value="Add Damage"/>
+        </form>
+    </section>
+</body>
+</html>
+
+
