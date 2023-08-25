@@ -25,6 +25,9 @@ public class BasicATK implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne(optional = false)
     @NotNull
     private Damage damage;
@@ -55,6 +58,19 @@ public class BasicATK implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public BasicATK description(String description) {
+        this.setDescription(description);
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Damage getDamage() {
@@ -95,6 +111,7 @@ public class BasicATK implements Serializable {
         return "BasicATK{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

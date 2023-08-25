@@ -44,6 +44,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="elementaltakedownApp.basicATK.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="damage.name">
             <div class="d-flex">
               <span jhiTranslate="elementaltakedownApp.basicATK.damage">Damage</span>
@@ -59,6 +65,7 @@
             <a [routerLink]="['/basic-atk', basicATK.id, 'view']">{{ basicATK.id }}</a>
           </td>
           <td>{{ basicATK.name }}</td>
+          <td>{{ basicATK.description }}</td>
           <td>
             <div *ngIf="basicATK.damage">
               <a [routerLink]="['/damage', basicATK.damage.id, 'view']">{{ basicATK.damage.name }}</a>

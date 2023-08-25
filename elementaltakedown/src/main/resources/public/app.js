@@ -114,9 +114,7 @@ function showBasicDetail(post1) {
     let desc1 = document.createElement('p');
 
     title1.innerHTML = `${post1.name}`;
-    desc1.innerHTML = `&emsp;Deals ${post1.damage.dmgValue} ${post1.damage.dmgElement} Damage`;
-    let output = DmgElementType[post1.damage.dmgElement];
-    console.log(`DmgElementType ${output}`);
+    desc1.innerHTML = `&emsp;${post1.description}`;
 
     li1.appendChild(title1);
     li1.appendChild(desc1);
