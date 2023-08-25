@@ -32,12 +32,10 @@ function parseDamage(type){
 //    console.log(`${type}damage element: ` + dataToSend["dmgElement"]);
 
     return postJSON(dataToSend, `${API_URL}/damages`);
-//    return null;
 }
 
 async function parseBasicATK(){
     var dataToSend = {};
-
     const damageJSON = await parseDamage("basic-");
 
     dataToSend["name"] = document.getElementById("basic-name").value;
@@ -48,14 +46,12 @@ async function parseBasicATK(){
 
     var resultingJSON = await postJSON(dataToSend, `${API_URL}/basic-atks`);
     delete resultingJSON.damage;
-//    console.log(resultingJSON);
 
     return resultingJSON;
 }
 
 async function parseSkill(){
     var dataToSend = {};
-
     const damageJSON = await parseDamage("skill-");
 
     dataToSend["name"] = document.getElementById("skill-name").value;
@@ -66,7 +62,6 @@ async function parseSkill(){
 
     var resultingJSON = await postJSON(dataToSend, `${API_URL}/skill-atks`);
     delete resultingJSON.damage;
-//    console.log(resultingJSON);
 
     return resultingJSON;
 }
@@ -86,7 +81,6 @@ async function parseUlt(){
 
     var resultingJSON = await postJSON(dataToSend, `${API_URL}/ultimate-atks`);
     delete resultingJSON.damage;
-//    console.log(resultingJSON);
 
     return resultingJSON;
 }

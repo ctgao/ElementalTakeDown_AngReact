@@ -67,6 +67,7 @@ function showCharaCard(post) {
     title.className = post.element.toLowerCase();
     let body = document.createElement('h3');
     body.className = post.element.toLowerCase();
+    body.style = "padding-left: 25px";
     let basic = document.createElement('div');
     basic.id = 'basicatk';
     let skill = document.createElement('div');
@@ -75,7 +76,7 @@ function showCharaCard(post) {
     ult.id = 'ultatk';
 
     title.innerHTML = `${post.name}`;
-    body.innerHTML = `&emsp;Element: ${post.element}`;
+    body.innerHTML = `Element: ${post.element}`;
     fetchBasic(post.basic.id);
     fetchSkill(post.skill.id);
     fetchUlt(post.ultimate.id);
@@ -114,7 +115,8 @@ function showBasicDetail(post1) {
     let desc1 = document.createElement('p');
 
     title1.innerHTML = `${post1.name}`;
-    desc1.innerHTML = `&emsp;${post1.description}`;
+    desc1.innerHTML = `${post1.description}`;
+    desc1.style = "padding-left: 25px";
 
     li1.appendChild(title1);
     li1.appendChild(desc1);
@@ -143,7 +145,8 @@ function showSkillDetail(post2){
     let desc2 = document.createElement('p');
 
     title2.innerHTML = `${post2.name}`;
-    desc2.innerHTML = `&emsp;${post2.description}`;
+    desc2.innerHTML = `${post2.description}`;
+    desc2.style = "padding-left: 25px";
 
     li2.appendChild(title2);
     li2.appendChild(desc2);
@@ -173,8 +176,10 @@ function showUltDetail(post3){
     let cost3 = document.createElement('p');
 
     title3.innerHTML = `${post3.name}`;
-    cost3.innerHTML = `&emsp;Required Energy: ${post3.requiredEnergy}`;
-    desc3.innerHTML = `&emsp;${post3.description}`;
+    cost3.innerHTML = `Required Energy: ${post3.requiredEnergy}`;
+    cost3.style = "padding-left: 25px";
+    desc3.innerHTML = `${post3.description}`;
+    desc3.style = "padding-left: 25px";
 
     li3.appendChild(title3);
     li3.appendChild(cost3);
