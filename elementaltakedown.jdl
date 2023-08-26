@@ -53,7 +53,7 @@ relationship ManyToOne {
 }
 
 relationship ManyToMany {
-  UserProfile{cards} to CharacterCard{owners}
+  UserProfile{cards(name)} to CharacterCard{owners}
 }
 
 enum ElementType {

@@ -63,9 +63,9 @@ function showCharaCard(post) {
 
     console.log("Character Card:", post);
     let li = document.createElement('div');
-    let title = document.createElement('h2');
+    let title = document.createElement('h1');
     title.className = post.element.toLowerCase();
-    let body = document.createElement('p');
+    let body = document.createElement('h3');
     body.className = post.element.toLowerCase();
     let basic = document.createElement('div');
     basic.id = 'basicatk';

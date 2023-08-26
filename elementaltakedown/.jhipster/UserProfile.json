@@ -1,0 +1,29 @@
+{
+  "applications": ["elementaltakedown"],
+  "changelogDate": "20230826145251",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "user_profile",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "UserProfile",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "characterCard",
+      "otherEntityRelationshipName": "owners",
+      "ownerSide": true,
+      "relationshipName": "cards",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

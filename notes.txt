@@ -1,0 +1,11 @@
+When you run the command 'jhipster jdl myjdlfilename.jdl --force', it'll change all files regardless.
+We need re-modify a couple of things.
+1. In SecurityConfig.java, permitAll() for the 'api/**' URL
+2. In Damage.java, replace the getName() function with this:
+    public String getName() {
+        if(this.dmgValue == 0) {
+            return "No Damage";
+        }
+        return this.dmgElement.getValue() + this.dmgValue;
+    }
+3. Run the SQL commands through the browser-based database in JHipster UI found on Drive.

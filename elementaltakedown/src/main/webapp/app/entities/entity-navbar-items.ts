@@ -24,4 +24,9 @@ export const EntityNavbarItems = [
     route: 'damage',
     translationKey: 'global.menu.entities.damage',
   },
+  {
+    name: 'UserProfile',
+    route: 'user-profile',
+    translationKey: 'global.menu.entities.userProfile',
+  },
 ];

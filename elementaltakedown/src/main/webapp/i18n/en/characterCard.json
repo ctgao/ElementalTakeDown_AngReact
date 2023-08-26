@@ -22,7 +22,8 @@
       "element": "Element",
       "basic": "Basic",
       "skill": "Skill",
-      "ultimate": "Ultimate"
+      "ultimate": "Ultimate",
+      "owners": "Owners"
     }
   }
 }

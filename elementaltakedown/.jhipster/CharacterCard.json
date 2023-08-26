@@ -46,6 +46,13 @@
       "relationshipName": "ultimate",
       "relationshipType": "one-to-one",
       "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "cards",
+      "ownerSide": false,
+      "relationshipName": "owners",
+      "relationshipType": "many-to-many"
     }
   ],
   "service": "no"
