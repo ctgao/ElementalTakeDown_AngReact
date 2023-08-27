@@ -1,19 +1,22 @@
 {
   "home": {
-    "title": "Welcome, Java Hipster!",
+    "title": "Welcome to Elemental Take Down!",
     "subtitle": "This is your homepage",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
-    "question": "If you have any question on JHipster:",
+    "description": "Want to play a complex and customizable Trading Card Game? With Elemental TakeDown, you can do just that! The base game consists of a persisting user profile, allowing each person to have their own repository of cards to play from! When your account gets created, the account gets 3 starter cards so you can start playing immediately! Playing rounds against other users or NPCs (computer-players) can increase your in-game currency which you can use to buy templates for customizing your own cards! In-game currency can also be used to buy more base cards to expand your repository.",
+    "description2": "How is Elemental TakeDown different from other TCGs? As the name implies, there’s an elemental system in place, filled with different elemental reactions that can change your damage output. Some reactions have splash damage (hitting multiple enemies for less) and others amplify the current damage (hitting a single enemy for more). The key to winning in this TCG is to utilize these different reactions to take down your enemy first! You can even create your own cards with the templates you own, further increasing the variety from match to match.",
     "link": {
+      "viewall": "Character Card Repository",
+      "createform": "Create your own Character Card!",
       "homepage": "JHipster homepage",
       "stackoverflow": "JHipster on Stack Overflow",
       "bugtracker": "JHipster bug tracker",
       "chat": "JHipster public chat room",
       "follow": "follow @jhipster on Twitter"
     },
-    "like": "If you like JHipster, don't forget to give us a star on",
+    "like": "If you'd like to understand this project, check out the ",
     "github": "GitHub"
   }
 }
