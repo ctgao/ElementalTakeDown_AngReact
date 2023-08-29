@@ -1,12 +1,14 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+/*    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, serif; */
+    font-family: Papyrus, Copperplate, fantasy, serif;
     letter-spacing: 2px;
     line-height: 1.6;
     color: white;
     max-width: 50rem;
     padding: 2rem;
     margin: auto;
-    background-color: #6B6B6B;
+    background-color: #aBaBaB;
+    font-weight: bolder;
 }
 
 img {
@@ -14,40 +16,39 @@ img {
 }
 
 .fire {
-    color: #fc3535;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color: #DC2A2A;
 }
 .water {
-    color: #2b2efc;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color: #1100FF;
 }
 .ice {
-    color: #35f9fc;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color: #00F7FF;
 }
 .earth {
-    color: #ffd814;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color: #FFCD00;
 }
 .electric {
-    color: #A61FFF;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color: #AB00FF;
 }
 .plant {
     color: #2dfc46;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 .wind {
     color: #57ffb9;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 a {
-    color: #2e8acc;
+    color: #D5FF00;
 }
 
 .maintitle {
-    color: #91167f;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color: #FF009A;
+    text-decoration: underline;
+/*    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; */
 }
 
+legend {
+    color: #843500;
+/*    outline: 2px #843500; */
+    font-size: 20px;
+}
