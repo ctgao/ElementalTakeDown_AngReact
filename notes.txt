@@ -1,4 +1,5 @@
 When you run the command 'jhipster jdl myjdlfilename.jdl --force', it'll change all files regardless.
+(and if you do the mvn clean thing)
 We need re-modify a couple of things.
 1. In SecurityConfig.java, permitAll() for the 'api/**' URL
 2. In Damage.java, replace the getName() function with this:
