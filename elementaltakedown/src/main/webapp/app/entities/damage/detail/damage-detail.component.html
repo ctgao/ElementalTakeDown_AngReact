@@ -26,6 +26,14 @@
         <dd>
           <span jhiTranslate="{{ 'elementaltakedownApp.DmgElementType.' + damage.dmgElement }}">{{ damage.dmgElement }}</span>
         </dd>
+        <dt><span jhiTranslate="elementaltakedownApp.damage.splashDmg">Splash Dmg</span></dt>
+        <dd>
+          <span>{{ damage.splashDmg }}</span>
+        </dd>
+        <dt><span jhiTranslate="elementaltakedownApp.damage.splashElement">Splash Element</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'elementaltakedownApp.DmgElementType.' + damage.splashElement }}">{{ damage.splashElement }}</span>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

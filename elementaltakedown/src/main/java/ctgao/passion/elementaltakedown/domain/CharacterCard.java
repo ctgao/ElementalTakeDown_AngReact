@@ -55,7 +55,7 @@ public class CharacterCard implements Serializable {
 
     @ManyToMany(mappedBy = "cards")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "cards" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "cards" }, allowSetters = true)
     private Set<UserProfile> owners = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

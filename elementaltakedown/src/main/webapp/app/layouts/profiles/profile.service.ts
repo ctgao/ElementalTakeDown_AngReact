@@ -26,13 +26,13 @@ export class ProfileService {
           openAPIEnabled: response.activeProfiles?.includes('api-docs'),
         };
         // HAHA this is where that dev ribbon gets placed onto the screen
-//         if (response.activeProfiles && response['display-ribbon-on-profiles']) {
-//           const displayRibbonOnProfiles = response['display-ribbon-on-profiles'].split(',');
-//           const ribbonProfiles = displayRibbonOnProfiles.filter(profile => response.activeProfiles?.includes(profile));
-//           if (ribbonProfiles.length > 0) {
-//             profileInfo.ribbonEnv = ribbonProfiles[0];
-//           }
-//         }
+ //         if (response.activeProfiles && response['display-ribbon-on-profiles']) {
+ //           const displayRibbonOnProfiles = response['display-ribbon-on-profiles'].split(',');
+ //           const ribbonProfiles = displayRibbonOnProfiles.filter(profile => response.activeProfiles?.includes(profile));
+ //           if (ribbonProfiles.length > 0) {
+ //             profileInfo.ribbonEnv = ribbonProfiles[0];
+ //           }
+ //         }
         return profileInfo;
       }),
       shareReplay()

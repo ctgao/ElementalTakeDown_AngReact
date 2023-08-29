@@ -7,6 +7,8 @@ import { finalize, map } from 'rxjs/operators';
 import { UserProfileFormService, UserProfileFormGroup } from './user-profile-form.service';
 import { IUserProfile } from '../user-profile.model';
 import { UserProfileService } from '../service/user-profile.service';
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
 import { ICharacterCard } from 'app/entities/character-card/character-card.model';
 import { CharacterCardService } from 'app/entities/character-card/service/character-card.service';
 
@@ -18,6 +20,7 @@ export class UserProfileUpdateComponent implements OnInit {
   isSaving = false;
   userProfile: IUserProfile | null = null;
 
+  usersSharedCollection: IUser[] = [];
   characterCardsSharedCollection: ICharacterCard[] = [];
 
   editForm: UserProfileFormGroup = this.userProfileFormService.createUserProfileFormGroup();
@@ -25,9 +28,12 @@ export class UserProfileUpdateComponent implements OnInit {
   constructor(
     protected userProfileService: UserProfileService,
     protected userProfileFormService: UserProfileFormService,
+    protected userService: UserService,
     protected characterCardService: CharacterCardService,
     protected activatedRoute: ActivatedRoute
   ) {}
+
+  compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);
 
   compareCharacterCard = (o1: ICharacterCard | null, o2: ICharacterCard | null): boolean =>
     this.characterCardService.compareCharacterCard(o1, o2);
@@ -80,6 +86,7 @@ export class UserProfileUpdateComponent implements OnInit {
     this.userProfile = userProfile;
     this.userProfileFormService.resetForm(this.editForm, userProfile);
 
+    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing<IUser>(this.usersSharedCollection, userProfile.user);
     this.characterCardsSharedCollection = this.characterCardService.addCharacterCardToCollectionIfMissing<ICharacterCard>(
       this.characterCardsSharedCollection,
       ...(userProfile.cards ?? [])
@@ -87,6 +94,12 @@ export class UserProfileUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
+    this.userService
+      .query()
+      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
+      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing<IUser>(users, this.userProfile?.user)))
+      .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
+
     this.characterCardService
       .query()
       .pipe(map((res: HttpResponse<ICharacterCard[]>) => res.body ?? []))

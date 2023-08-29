@@ -134,6 +134,12 @@ public class DamageResource {
                 if (damage.getDmgElement() != null) {
                     existingDamage.setDmgElement(damage.getDmgElement());
                 }
+                if (damage.getSplashDmg() != null) {
+                    existingDamage.setSplashDmg(damage.getSplashDmg());
+                }
+                if (damage.getSplashElement() != null) {
+                    existingDamage.setSplashElement(damage.getSplashElement());
+                }
 
                 return existingDamage;
             })

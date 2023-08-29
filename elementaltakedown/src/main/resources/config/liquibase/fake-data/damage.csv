@@ -1,11 +1,11 @@
-id;name;dmg_value;dmg_element
-1;payment Rapid;82495;ICE
-2;fresh-thinking open-source;48369;ICE
-3;Movies;38178;EARTH
-4;viral Village azure;59048;ICE
-5;Direct invoice Pula;89159;PHYSICAL
-6;copy Internal New;88374;ICE
-7;integrate;3911;EARTH
-8;iterate;41082;PLANT
-9;productivity Books copying;40132;FIRE
-10;archive;93260;WATER
+id;name;dmg_value;dmg_element;splash_dmg;splash_element
+1;payment Rapid;82495;ICE;40950;ICE
+2;impactful Sleek;32250;WATER;7767;WIND
+3;application back-end;94673;WIND;19449;PHYSICAL
+4;Iowa;90686;WATER;3694;EARTH
+5;Progressive Unbranded 1080p;86359;PHYSICAL;83935;EARTH
+6;Kentucky adapter;3579;PHYSICAL;3911;EARTH
+7;iterate;41082;PLANT;99786;ICE
+8;Lead Internal Administrator;17579;ICE;9443;PLANT
+9;Handcrafted withdrawal transition;91996;WIND;42878;WIND
+10;Technician Direct;42313;WIND;85839;PLANT

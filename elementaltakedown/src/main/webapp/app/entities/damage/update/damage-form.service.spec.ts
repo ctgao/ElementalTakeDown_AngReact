@@ -23,6 +23,8 @@ describe('Damage Form Service', () => {
             name: expect.any(Object),
             dmgValue: expect.any(Object),
             dmgElement: expect.any(Object),
+            splashDmg: expect.any(Object),
+            splashElement: expect.any(Object),
           })
         );
       });
@@ -36,6 +38,8 @@ describe('Damage Form Service', () => {
             name: expect.any(Object),
             dmgValue: expect.any(Object),
             dmgElement: expect.any(Object),
+            splashDmg: expect.any(Object),
+            splashElement: expect.any(Object),
           })
         );
       });

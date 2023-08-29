@@ -19,6 +19,15 @@
       "fieldType": "DmgElementType",
       "fieldValidateRules": ["required"],
       "fieldValues": "WATER (Water),FIRE (Fire),ICE (Ice),PLANT (Plant),ELECTRIC (Electric),EARTH (Earth),WIND (Wind),PHYSICAL (Physical)"
+    },
+    {
+      "fieldName": "splashDmg",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "splashElement",
+      "fieldType": "DmgElementType",
+      "fieldValues": "WATER (Water),FIRE (Fire),ICE (Ice),PLANT (Plant),ELECTRIC (Electric),EARTH (Earth),WIND (Wind),PHYSICAL (Physical)"
     }
   ],
   "fluentMethods": true,

@@ -27,6 +27,10 @@ public class UserProfile implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
+
     @ManyToMany
     @JoinTable(
         name = "rel_user_profile__cards",
@@ -63,6 +67,19 @@ public class UserProfile implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public UserProfile user(User user) {
+        this.setUser(user);
+        return this;
     }
 
     public Set<CharacterCard> getCards() {

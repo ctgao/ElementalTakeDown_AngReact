@@ -56,6 +56,18 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="splashDmg">
+            <div class="d-flex">
+              <span jhiTranslate="elementaltakedownApp.damage.splashDmg">Splash Dmg</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="splashElement">
+            <div class="d-flex">
+              <span jhiTranslate="elementaltakedownApp.damage.splashElement">Splash Element</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -67,6 +79,8 @@
           <td>{{ damage.name }}</td>
           <td>{{ damage.dmgValue }}</td>
           <td jhiTranslate="{{ 'elementaltakedownApp.DmgElementType.' + damage.dmgElement }}">{{ damage.dmgElement }}</td>
+          <td>{{ damage.splashDmg }}</td>
+          <td jhiTranslate="{{ 'elementaltakedownApp.DmgElementType.' + damage.splashElement }}">{{ damage.splashElement }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/damage', damage.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

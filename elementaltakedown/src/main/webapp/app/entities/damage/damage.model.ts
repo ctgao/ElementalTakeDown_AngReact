@@ -5,6 +5,8 @@ export interface IDamage {
   name?: string | null;
   dmgValue?: number | null;
   dmgElement?: DmgElementType | null;
+  splashDmg?: number | null;
+  splashElement?: DmgElementType | null;
 }
 
 export type NewDamage = Omit<IDamage, 'id'> & { id: null };

@@ -9,22 +9,25 @@ export const sampleWithRequiredData: IDamage = {
 };
 
 export const sampleWithPartialData: IDamage = {
-  id: 46013,
-  name: 'Money Metal',
-  dmgValue: 44653,
-  dmgElement: DmgElementType['PHYSICAL'],
+  id: 61454,
+  name: 'yellow Fresh',
+  dmgValue: 66227,
+  dmgElement: DmgElementType['ELECTRIC'],
+  splashElement: DmgElementType['PHYSICAL'],
 };
 
 export const sampleWithFullData: IDamage = {
-  id: 55461,
-  name: 'payment Soft',
-  dmgValue: 77020,
-  dmgElement: DmgElementType['ELECTRIC'],
+  id: 12440,
+  name: 'Loan Refined SCSI',
+  dmgValue: 12624,
+  dmgElement: DmgElementType['FIRE'],
+  splashDmg: 78360,
+  splashElement: DmgElementType['WATER'],
 };
 
 export const sampleWithNewData: NewDamage = {
-  dmgValue: 7962,
-  dmgElement: DmgElementType['WIND'],
+  dmgValue: 96080,
+  dmgElement: DmgElementType['ELECTRIC'],
   id: null,
 };
 

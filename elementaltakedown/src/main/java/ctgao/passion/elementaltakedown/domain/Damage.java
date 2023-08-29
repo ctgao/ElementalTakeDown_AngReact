@@ -35,6 +35,13 @@ public class Damage implements Serializable {
     @Column(name = "dmg_element", nullable = false)
     private DmgElementType dmgElement;
 
+    @Column(name = "splash_dmg")
+    private Integer splashDmg;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "splash_element")
+    private DmgElementType splashElement;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -51,13 +58,29 @@ public class Damage implements Serializable {
     }
 
     public String getName() {
-        if(this.dmgValue < 0) {
-            return "Heal" + (-1 * this.dmgValue);
-        }
         if(this.dmgValue == 0) {
-            return "No Damage";
+            return "Transformative";
         }
-        return this.dmgElement.getValue() + this.dmgValue;
+        StringBuilder sb = new StringBuilder();
+        if(this.dmgValue < 0){
+            sb.append("Heal");
+            sb.append(-1 * this.dmgValue);
+        }
+        else{
+            sb.append(this.dmgElement.getValue());
+            sb.append(this.dmgValue);
+        }
+        if(this.splashDmg != null && this.splashDmg != null && this.splashDmg != 0) {
+            sb.append(" Splash:");
+            if (this.splashDmg < 0) {
+                sb.append("Heal");
+                sb.append(-1 * this.splashDmg);
+            } else {
+                sb.append(this.splashElement.getValue());
+                sb.append(this.splashDmg);
+            }
+        }
+        return sb.toString();
     }
 
     public Damage name(String name) {
@@ -95,6 +118,32 @@ public class Damage implements Serializable {
         this.dmgElement = dmgElement;
     }
 
+    public Integer getSplashDmg() {
+        return this.splashDmg;
+    }
+
+    public Damage splashDmg(Integer splashDmg) {
+        this.setSplashDmg(splashDmg);
+        return this;
+    }
+
+    public void setSplashDmg(Integer splashDmg) {
+        this.splashDmg = splashDmg;
+    }
+
+    public DmgElementType getSplashElement() {
+        return this.splashElement;
+    }
+
+    public Damage splashElement(DmgElementType splashElement) {
+        this.setSplashElement(splashElement);
+        return this;
+    }
+
+    public void setSplashElement(DmgElementType splashElement) {
+        this.splashElement = splashElement;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -122,6 +171,8 @@ public class Damage implements Serializable {
             ", name='" + getName() + "'" +
             ", dmgValue=" + getDmgValue() +
             ", dmgElement='" + getDmgElement() + "'" +
+            ", splashDmg=" + getSplashDmg() +
+            ", splashElement='" + getSplashElement() + "'" +
             "}";
     }
 }

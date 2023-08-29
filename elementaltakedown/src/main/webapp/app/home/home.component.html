@@ -6,12 +6,12 @@
   <div class="col-md-9">
     <h1 class="display-4"><span jhiTranslate="home.title">Welcome, ZipCoder!</span></h1>
 
-<!--    <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>-->
+    <!--    <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>-->
 
     <div [ngSwitch]="account !== null">
       <div class="alert alert-success" *ngSwitchCase="true">
         <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }"
-          >You are logged in as user "{{ account.login }}".</span
+        >You are logged in as user "{{ account.login }}".</span
         >
       </div>
 
@@ -19,9 +19,9 @@
         <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
         <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a
         ><span jhiTranslate="global.messages.info.authenticated.suffix"
-          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
+      >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
           password="user").</span
-        >
+      >
       </div>
 
       <div class="alert alert-warning" *ngSwitchCase="false">
@@ -34,12 +34,12 @@
     <br>
     <p jhiTranslate="home.description2">This is a description 2!</p>
 
-<!--    <p jhiTranslate="home.question">If you have any question on JHipster:</p>-->
+    <!--    <p jhiTranslate="home.question">If you have any question on JHipster:</p>-->
 
     <ul>
       <li>
-        <a href="http://localhost:8080/charactercards.html" target="_blank" jhiTranslate="home.link.viewall"
-          >View All</a
+        <a href="http://localhost:8080/viewcharacters.html" target="_blank" jhiTranslate="home.link.viewall"
+        >View All</a
         >
       </li>
       <li>
@@ -47,34 +47,34 @@
           href="http://localhost:8080/addcharactercard.html"
           target="_blank"
           jhiTranslate="home.link.createform"
-          >Form for Creation</a
+        >Form for Creation</a
         >
       </li>
-<!--      <li>-->
-<!--        <a-->
-<!--          href="https://github.com/jhipster/generator-jhipster/issues?state=open"-->
-<!--          target="_blank"-->
-<!--          rel="noopener noreferrer"-->
-<!--          jhiTranslate="home.link.bugtracker"-->
-<!--          >JHipster bug tracker</a-->
-<!--        >-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.chat"-->
-<!--          >JHipster public chat room</a-->
-<!--        >-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.follow"-->
-<!--          >follow @jhipster on Twitter</a-->
-<!--        >-->
-<!--      </li>-->
+      <!--      <li>-->
+      <!--        <a-->
+      <!--          href="https://github.com/jhipster/generator-jhipster/issues?state=open"-->
+      <!--          target="_blank"-->
+      <!--          rel="noopener noreferrer"-->
+      <!--          jhiTranslate="home.link.bugtracker"-->
+      <!--          >JHipster bug tracker</a-->
+      <!--        >-->
+      <!--      </li>-->
+      <!--      <li>-->
+      <!--        <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.chat"-->
+      <!--          >JHipster public chat room</a-->
+      <!--        >-->
+      <!--      </li>-->
+      <!--      <li>-->
+      <!--        <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.follow"-->
+      <!--          >follow @jhipster on Twitter</a-->
+      <!--        >-->
+      <!--      </li>-->
     </ul>
 
     <p>
       <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span>
       <a href="https://github.com/ctgao/ElementalTakeDown" target="_blank" rel="noopener noreferrer" jhiTranslate="home.github"
-        >GitHub</a
+      >GitHub</a
       >!
     </p>
   </div>

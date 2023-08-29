@@ -18,14 +18,26 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserProfileRepository extends UserProfileRepositoryWithBagRelationships, JpaRepository<UserProfile, Long> {
     default Optional<UserProfile> findOneWithEagerRelationships(Long id) {
-        return this.fetchBagRelationships(this.findById(id));
+        return this.fetchBagRelationships(this.findOneWithToOneRelationships(id));
     }
 
     default List<UserProfile> findAllWithEagerRelationships() {
-        return this.fetchBagRelationships(this.findAll());
+        return this.fetchBagRelationships(this.findAllWithToOneRelationships());
     }
 
     default Page<UserProfile> findAllWithEagerRelationships(Pageable pageable) {
-        return this.fetchBagRelationships(this.findAll(pageable));
+        return this.fetchBagRelationships(this.findAllWithToOneRelationships(pageable));
     }
+
+    @Query(
+        value = "select distinct userProfile from UserProfile userProfile left join fetch userProfile.user",
+        countQuery = "select count(distinct userProfile) from UserProfile userProfile"
+    )
+    Page<UserProfile> findAllWithToOneRelationships(Pageable pageable);
+
+    @Query("select distinct userProfile from UserProfile userProfile left join fetch userProfile.user")
+    List<UserProfile> findAllWithToOneRelationships();
+
+    @Query("select userProfile from UserProfile userProfile left join fetch userProfile.user where userProfile.id =:id")
+    Optional<UserProfile> findOneWithToOneRelationships(@Param("id") Long id);
 }

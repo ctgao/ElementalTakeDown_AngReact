@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import ctgao.passion.elementaltakedown.IntegrationTest;
 import ctgao.passion.elementaltakedown.domain.Damage;
 import ctgao.passion.elementaltakedown.domain.enumeration.DmgElementType;
+import ctgao.passion.elementaltakedown.domain.enumeration.DmgElementType;
 import ctgao.passion.elementaltakedown.repository.DamageRepository;
 import java.util.List;
 import java.util.Random;
@@ -39,6 +40,12 @@ class DamageResourceIT {
     private static final DmgElementType DEFAULT_DMG_ELEMENT = DmgElementType.WATER;
     private static final DmgElementType UPDATED_DMG_ELEMENT = DmgElementType.FIRE;
 
+    private static final Integer DEFAULT_SPLASH_DMG = 1;
+    private static final Integer UPDATED_SPLASH_DMG = 2;
+
+    private static final DmgElementType DEFAULT_SPLASH_ELEMENT = DmgElementType.WATER;
+    private static final DmgElementType UPDATED_SPLASH_ELEMENT = DmgElementType.FIRE;
+
     private static final String ENTITY_API_URL = "/api/damages";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -63,7 +70,12 @@ class DamageResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Damage createEntity(EntityManager em) {
-        Damage damage = new Damage().name(DEFAULT_NAME).dmgValue(DEFAULT_DMG_VALUE).dmgElement(DEFAULT_DMG_ELEMENT);
+        Damage damage = new Damage()
+            .name(DEFAULT_NAME)
+            .dmgValue(DEFAULT_DMG_VALUE)
+            .dmgElement(DEFAULT_DMG_ELEMENT)
+            .splashDmg(DEFAULT_SPLASH_DMG)
+            .splashElement(DEFAULT_SPLASH_ELEMENT);
         return damage;
     }
 
@@ -74,7 +86,12 @@ class DamageResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Damage createUpdatedEntity(EntityManager em) {
-        Damage damage = new Damage().name(UPDATED_NAME).dmgValue(UPDATED_DMG_VALUE).dmgElement(UPDATED_DMG_ELEMENT);
+        Damage damage = new Damage()
+            .name(UPDATED_NAME)
+            .dmgValue(UPDATED_DMG_VALUE)
+            .dmgElement(UPDATED_DMG_ELEMENT)
+            .splashDmg(UPDATED_SPLASH_DMG)
+            .splashElement(UPDATED_SPLASH_ELEMENT);
         return damage;
     }
 
@@ -99,6 +116,8 @@ class DamageResourceIT {
         assertThat(testDamage.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testDamage.getDmgValue()).isEqualTo(DEFAULT_DMG_VALUE);
         assertThat(testDamage.getDmgElement()).isEqualTo(DEFAULT_DMG_ELEMENT);
+        assertThat(testDamage.getSplashDmg()).isEqualTo(DEFAULT_SPLASH_DMG);
+        assertThat(testDamage.getSplashElement()).isEqualTo(DEFAULT_SPLASH_ELEMENT);
     }
 
     @Test
@@ -167,7 +186,9 @@ class DamageResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(damage.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].dmgValue").value(hasItem(DEFAULT_DMG_VALUE)))
-            .andExpect(jsonPath("$.[*].dmgElement").value(hasItem(DEFAULT_DMG_ELEMENT.toString())));
+            .andExpect(jsonPath("$.[*].dmgElement").value(hasItem(DEFAULT_DMG_ELEMENT.toString())))
+            .andExpect(jsonPath("$.[*].splashDmg").value(hasItem(DEFAULT_SPLASH_DMG)))
+            .andExpect(jsonPath("$.[*].splashElement").value(hasItem(DEFAULT_SPLASH_ELEMENT.toString())));
     }
 
     @Test
@@ -184,7 +205,9 @@ class DamageResourceIT {
             .andExpect(jsonPath("$.id").value(damage.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.dmgValue").value(DEFAULT_DMG_VALUE))
-            .andExpect(jsonPath("$.dmgElement").value(DEFAULT_DMG_ELEMENT.toString()));
+            .andExpect(jsonPath("$.dmgElement").value(DEFAULT_DMG_ELEMENT.toString()))
+            .andExpect(jsonPath("$.splashDmg").value(DEFAULT_SPLASH_DMG))
+            .andExpect(jsonPath("$.splashElement").value(DEFAULT_SPLASH_ELEMENT.toString()));
     }
 
     @Test
@@ -206,7 +229,12 @@ class DamageResourceIT {
         Damage updatedDamage = damageRepository.findById(damage.getId()).get();
         // Disconnect from session so that the updates on updatedDamage are not directly saved in db
         em.detach(updatedDamage);
-        updatedDamage.name(UPDATED_NAME).dmgValue(UPDATED_DMG_VALUE).dmgElement(UPDATED_DMG_ELEMENT);
+        updatedDamage
+            .name(UPDATED_NAME)
+            .dmgValue(UPDATED_DMG_VALUE)
+            .dmgElement(UPDATED_DMG_ELEMENT)
+            .splashDmg(UPDATED_SPLASH_DMG)
+            .splashElement(UPDATED_SPLASH_ELEMENT);
 
         restDamageMockMvc
             .perform(
@@ -223,6 +251,8 @@ class DamageResourceIT {
         assertThat(testDamage.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testDamage.getDmgValue()).isEqualTo(UPDATED_DMG_VALUE);
         assertThat(testDamage.getDmgElement()).isEqualTo(UPDATED_DMG_ELEMENT);
+        assertThat(testDamage.getSplashDmg()).isEqualTo(UPDATED_SPLASH_DMG);
+        assertThat(testDamage.getSplashElement()).isEqualTo(UPDATED_SPLASH_ELEMENT);
     }
 
     @Test
@@ -293,7 +323,7 @@ class DamageResourceIT {
         Damage partialUpdatedDamage = new Damage();
         partialUpdatedDamage.setId(damage.getId());
 
-        partialUpdatedDamage.name(UPDATED_NAME).dmgElement(UPDATED_DMG_ELEMENT);
+        partialUpdatedDamage.name(UPDATED_NAME).dmgElement(UPDATED_DMG_ELEMENT).splashElement(UPDATED_SPLASH_ELEMENT);
 
         restDamageMockMvc
             .perform(
@@ -310,6 +340,8 @@ class DamageResourceIT {
         assertThat(testDamage.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testDamage.getDmgValue()).isEqualTo(DEFAULT_DMG_VALUE);
         assertThat(testDamage.getDmgElement()).isEqualTo(UPDATED_DMG_ELEMENT);
+        assertThat(testDamage.getSplashDmg()).isEqualTo(DEFAULT_SPLASH_DMG);
+        assertThat(testDamage.getSplashElement()).isEqualTo(UPDATED_SPLASH_ELEMENT);
     }
 
     @Test
@@ -324,7 +356,12 @@ class DamageResourceIT {
         Damage partialUpdatedDamage = new Damage();
         partialUpdatedDamage.setId(damage.getId());
 
-        partialUpdatedDamage.name(UPDATED_NAME).dmgValue(UPDATED_DMG_VALUE).dmgElement(UPDATED_DMG_ELEMENT);
+        partialUpdatedDamage
+            .name(UPDATED_NAME)
+            .dmgValue(UPDATED_DMG_VALUE)
+            .dmgElement(UPDATED_DMG_ELEMENT)
+            .splashDmg(UPDATED_SPLASH_DMG)
+            .splashElement(UPDATED_SPLASH_ELEMENT);
 
         restDamageMockMvc
             .perform(
@@ -341,6 +378,8 @@ class DamageResourceIT {
         assertThat(testDamage.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testDamage.getDmgValue()).isEqualTo(UPDATED_DMG_VALUE);
         assertThat(testDamage.getDmgElement()).isEqualTo(UPDATED_DMG_ELEMENT);
+        assertThat(testDamage.getSplashDmg()).isEqualTo(UPDATED_SPLASH_DMG);
+        assertThat(testDamage.getSplashElement()).isEqualTo(UPDATED_SPLASH_ELEMENT);
     }
 
     @Test
