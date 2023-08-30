@@ -8,15 +8,18 @@
         <span jhiTranslate="elementaltakedownApp.characterCard.home.refreshListLabel">Refresh list</span>
       </button>
 
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-character-card"
-        [routerLink]="['/character-card/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span> Add a Character to your Profile </span>
-      </button>
+<!--      <div *jhiHasAnyAuthority="'ROLE_ADMIN'">-->
+        <button
+          *jhiHasAnyAuthority="'ROLE_ADMIN'"
+          id="jh-create-entity"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity modify-archive"
+          [routerLink]="['/archive/edit']"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span> Add a Character to your Profile </span>
+        </button>
+<!--      </div>-->
     </div>
   </h2>
 

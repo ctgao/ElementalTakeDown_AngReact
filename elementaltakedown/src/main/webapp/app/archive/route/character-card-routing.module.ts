@@ -15,7 +15,7 @@ const characterCardRoute: Routes = [
     data: {
       defaultSort: 'id,' + ASC,
     },
-    canActivate: [UserRouteAccessService],
+//     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
@@ -23,24 +23,24 @@ const characterCardRoute: Routes = [
     resolve: {
       characterCard: CharacterCardRoutingResolveService,
     },
-    canActivate: [UserRouteAccessService],
+//     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new',
+    path: 'edit',
     component: CharacterCardUpdateComponent,
     resolve: {
       characterCard: CharacterCardRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
-  {
-    path: ':id/edit',
-    component: CharacterCardUpdateComponent,
-    resolve: {
-      characterCard: CharacterCardRoutingResolveService,
-    },
-    canActivate: [UserRouteAccessService],
-  },
+//   {
+//     path: ':id/edit',
+//     component: CharacterCardUpdateComponent,
+//     resolve: {
+//       characterCard: CharacterCardRoutingResolveService,
+//     },
+//     canActivate: [UserRouteAccessService],
+//   },
 ];
 
 @NgModule({

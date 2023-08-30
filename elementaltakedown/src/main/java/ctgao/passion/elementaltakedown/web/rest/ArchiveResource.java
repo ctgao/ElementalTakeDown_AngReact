@@ -22,7 +22,7 @@ import java.util.List;
  * REST controller for managing {@link ctgao.passion.elementaltakedown.domain.UserProfile}.
  */
 @RestController
-@RequestMapping("/archive")
+@RequestMapping("/api/character-cards/archive")
 @Transactional
 public class ArchiveResource {
 
