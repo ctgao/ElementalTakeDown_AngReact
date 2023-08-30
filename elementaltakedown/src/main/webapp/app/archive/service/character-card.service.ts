@@ -40,11 +40,15 @@ export class CharacterCardService {
   }
 
 // is it this???
-  query(req?: any): Observable<EntityArrayResponseType> {
+  query(login: string, req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    // ??? where do we get this from???
-//     return this.http.get<ICharacterCard[]>(`archive/${login}`, { params: options, observe: 'response' });
-    return this.http.get<ICharacterCard[]>(`${this.archiveResourceUrl}/admin`, { params: options, observe: 'response' });
+
+    if(login === ""){
+      return this.http.get<ICharacterCard[]>(`${this.resourceUrl}`, { params: options, observe: 'response' });
+    }
+    else{
+      return this.http.get<ICharacterCard[]>(`${this.archiveResourceUrl}/${login}`, { params: options, observe: 'response' });
+    }
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

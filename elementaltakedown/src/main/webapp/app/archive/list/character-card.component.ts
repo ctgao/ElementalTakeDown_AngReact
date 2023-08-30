@@ -36,8 +36,8 @@ export class CharacterCardComponent implements OnInit {
   trackId = (_index: number, item: ICharacterCard): number => this.characterCardService.getCharacterCardIdentifier(item);
 
   ngOnInit(): void {
-    this.load();
     this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+    this.load();
 //     console.log(this.account);
   }
 
@@ -101,7 +101,8 @@ export class CharacterCardComponent implements OnInit {
       eagerload: true,
       sort: this.getSortQueryParam(predicate, ascending),
     };
-    return this.characterCardService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    const loginToFind = this.account ? this.account.login : "";
+    return this.characterCardService.query(loginToFind, queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
   protected handleNavigation(predicate?: string, ascending?: boolean): void {
