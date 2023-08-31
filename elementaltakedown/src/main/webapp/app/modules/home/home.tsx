@@ -16,8 +16,8 @@ export const Home = () => {
         <span className="hipster rounded" />
       </Col>
       <Col md="9">
-        <h2>Welcome, Java Hipster!</h2>
-        <p className="lead">This is your homepage</p>
+        <h2>Welcome, ZipCoder!</h2>
+        <p className="lead">This is your homepage :)</p>
         {account?.login ? (
           <div>
             <Alert color="success">You are logged in as user &quot;{account.login}&quot;.</Alert>
@@ -75,7 +75,7 @@ export const Home = () => {
 
         <p>
           If you like JHipster, don&apos;t forget to give us a star on{' '}
-          <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/ctgao/ElementalTakeDown" target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
           !
