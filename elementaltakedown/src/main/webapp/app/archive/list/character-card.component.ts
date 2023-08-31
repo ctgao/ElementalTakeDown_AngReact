@@ -76,8 +76,6 @@ export class CharacterCardComponent implements OnInit {
   }
 
   protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
-    console.log(params);
-    console.log(data);
     const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
@@ -103,7 +101,7 @@ export class CharacterCardComponent implements OnInit {
       sort: this.getSortQueryParam(predicate, ascending),
     };
     const loginToFind = this.account ? this.account.login : "";
-      return this.characterCardService.query(loginToFind, queryObject).pipe(tap(() => (this.isLoading = false)));
+    return this.characterCardService.query(loginToFind, queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
   protected handleNavigation(predicate?: string, ascending?: boolean): void {
