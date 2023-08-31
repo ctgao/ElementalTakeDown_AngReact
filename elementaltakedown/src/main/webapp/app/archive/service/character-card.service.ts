@@ -13,7 +13,7 @@ export type EntityResponseType = HttpResponse<ICharacterCard>;
 export type EntityArrayResponseType = HttpResponse<ICharacterCard[]>;
 
 @Injectable({ providedIn: 'root' })
-export class CharacterCardService {
+export class ArchiveService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/character-cards');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}

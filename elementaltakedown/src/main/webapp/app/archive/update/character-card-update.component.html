@@ -13,10 +13,10 @@
         <jhi-alert-error></jhi-alert-error>
       </div>
 
-      <div class="table-responsive table-entities" id="entities" *ngIf="characterCards && characterCards.length > 0">
+      <div class="table-responsive table-entities" id="entities" *ngIf="allCharacters && allCharacters.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
           <thead>
-          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
             <th scope="col" jhiSortBy="id">
               <div class="d-flex">
                 <span jhiTranslate="global.field.id">ID</span>
@@ -25,18 +25,18 @@
             </th>
             <th scope="col" jhiSortBy="name">
               <div class="d-flex">
-                <span jhiTranslate="elementaltakedownApp.characterCard.name">Name</span>
+                <span>Character Name</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let characterCard of characterCards; trackBy: trackId" data-cy="entityTable">
+          <tr *ngFor="let allCharacters of allCharacters; trackBy: trackId" data-cy="entityTable">
             <td>
-              <a [routerLink]="['/character-card', characterCard.id, 'view']">{{ characterCard.id }}</a>
+              <a [routerLink]="['/character-card', allCharacters.id, 'view']">{{ allCharacters.id }}</a>
             </td>
-            <td>{{ characterCard.name }}</td>
+            <td>{{ allCharacters.name }}</td>
           </tr>
           </tbody>
         </table>
