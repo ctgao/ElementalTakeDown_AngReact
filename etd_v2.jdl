@@ -1,0 +1,81 @@
+application {
+  config {
+    baseName elementaltakedown,
+    packageName ctgao.passion.elementaltakedown,
+    applicationType monolith,
+    prodDatabaseType mysql,
+  }
+  entities *
+}
+
+entity UserProfile {
+  name String
+}
+
+entity CharacterCard {
+  name String required
+  element ElementType required
+}
+
+entity BasicATK {
+  name String
+  description String
+}
+
+entity SkillATK {
+  name String
+  description String
+  // will later have bonus effects
+}
+
+entity UltimateATK {
+  name String
+  description String
+  requiredEnergy Integer required
+}
+
+entity Damage {
+  name String
+  dmgValue Integer required
+  dmgElement DmgElementType required
+  splashDmg Integer
+  splashElement DmgElementType
+}
+
+relationship OneToOne {
+  CharacterCard{basic(name) required} to BasicATK
+  CharacterCard{skill(name) required} to SkillATK
+  CharacterCard{ultimate(name) required} to UltimateATK
+  UserProfile{user(login)} to User{profile}
+}
+
+relationship ManyToOne {
+  BasicATK{damage(name) required} to Damage
+  SkillATK{damage(name) required} to Damage
+  UltimateATK{damage(name) required} to Damage
+}
+
+relationship ManyToMany {
+  UserProfile{cards(name)} to CharacterCard{owners}
+}
+
+enum ElementType {
+  WATER
+  FIRE
+  ICE
+  PLANT
+  ELECTRIC
+  EARTH
+  WIND
+}
+
+enum DmgElementType {
+  WATER("Water")
+  FIRE("Fire")
+  ICE("Ice")
+  PLANT("Plant")
+  ELECTRIC("Electric")
+  EARTH("Earth")
+  WIND("Wind")
+  PHYSICAL("Physical")
+}
