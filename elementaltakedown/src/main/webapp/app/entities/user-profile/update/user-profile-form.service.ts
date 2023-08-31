@@ -19,6 +19,7 @@ type UserProfileFormDefaults = Pick<NewUserProfile, 'id' | 'cards'>;
 type UserProfileFormGroupContent = {
   id: FormControl<IUserProfile['id'] | NewUserProfile['id']>;
   name: FormControl<IUserProfile['name']>;
+  user: FormControl<IUserProfile['user']>;
   cards: FormControl<IUserProfile['cards']>;
 };
 
@@ -40,6 +41,7 @@ export class UserProfileFormService {
         }
       ),
       name: new FormControl(userProfileRawValue.name),
+      user: new FormControl(userProfileRawValue.user),
       cards: new FormControl(userProfileRawValue.cards ?? []),
     });
   }

@@ -13,10 +13,10 @@
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="elementaltakedownApp.damage.name" for="field_name">Name</label>
-          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
-        </div>
+<!--        <div class="row mb-3">-->
+<!--          <label class="form-label" jhiTranslate="elementaltakedownApp.damage.name" for="field_name">Name</label>-->
+<!--          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />-->
+<!--        </div>-->
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="elementaltakedownApp.damage.dmgValue" for="field_dmgValue">Dmg Value</label>
@@ -56,6 +56,29 @@
               This field is required.
             </small>
           </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="elementaltakedownApp.damage.splashDmg" for="field_splashDmg">Splash Dmg</label>
+          <input type="number" class="form-control" name="splashDmg" id="field_splashDmg" data-cy="splashDmg" formControlName="splashDmg" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="elementaltakedownApp.damage.splashElement" for="field_splashElement"
+            >Splash Element</label
+          >
+          <select
+            class="form-control"
+            name="splashElement"
+            formControlName="splashElement"
+            id="field_splashElement"
+            data-cy="splashElement"
+          >
+            <option [ngValue]="null">{{ 'elementaltakedownApp.DmgElementType.null' | translate }}</option>
+            <option *ngFor="let dmgElementType of dmgElementTypeValues" [value]="dmgElementType">
+              {{ 'elementaltakedownApp.DmgElementType.' + dmgElementType | translate }}
+            </option>
+          </select>
         </div>
       </div>
 

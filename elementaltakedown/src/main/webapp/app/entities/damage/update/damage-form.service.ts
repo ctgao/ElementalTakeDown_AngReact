@@ -21,6 +21,8 @@ type DamageFormGroupContent = {
   name: FormControl<IDamage['name']>;
   dmgValue: FormControl<IDamage['dmgValue']>;
   dmgElement: FormControl<IDamage['dmgElement']>;
+  splashDmg: FormControl<IDamage['splashDmg']>;
+  splashElement: FormControl<IDamage['splashElement']>;
 };
 
 export type DamageFormGroup = FormGroup<DamageFormGroupContent>;
@@ -47,6 +49,8 @@ export class DamageFormService {
       dmgElement: new FormControl(damageRawValue.dmgElement, {
         validators: [Validators.required],
       }),
+      splashDmg: new FormControl(damageRawValue.splashDmg),
+      splashElement: new FormControl(damageRawValue.splashElement),
     });
   }
 

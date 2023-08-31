@@ -9,6 +9,9 @@ import { of, Subject, from } from 'rxjs';
 import { UserProfileFormService } from './user-profile-form.service';
 import { UserProfileService } from '../service/user-profile.service';
 import { IUserProfile } from '../user-profile.model';
+
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
 import { ICharacterCard } from 'app/entities/character-card/character-card.model';
 import { CharacterCardService } from 'app/entities/character-card/service/character-card.service';
 
@@ -20,6 +23,7 @@ describe('UserProfile Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let userProfileFormService: UserProfileFormService;
   let userProfileService: UserProfileService;
+  let userService: UserService;
   let characterCardService: CharacterCardService;
 
   beforeEach(() => {
@@ -43,12 +47,35 @@ describe('UserProfile Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     userProfileFormService = TestBed.inject(UserProfileFormService);
     userProfileService = TestBed.inject(UserProfileService);
+    userService = TestBed.inject(UserService);
     characterCardService = TestBed.inject(CharacterCardService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
+    it('Should call User query and add missing value', () => {
+      const userProfile: IUserProfile = { id: 456 };
+      const user: IUser = { id: 28285 };
+      userProfile.user = user;
+
+      const userCollection: IUser[] = [{ id: 78135 }];
+      jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
+      const additionalUsers = [user];
+      const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
+      jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ userProfile });
+      comp.ngOnInit();
+
+      expect(userService.query).toHaveBeenCalled();
+      expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(
+        userCollection,
+        ...additionalUsers.map(expect.objectContaining)
+      );
+      expect(comp.usersSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should call CharacterCard query and add missing value', () => {
       const userProfile: IUserProfile = { id: 456 };
       const cards: ICharacterCard[] = [{ id: 42418 }];
@@ -73,12 +100,15 @@ describe('UserProfile Management Update Component', () => {
 
     it('Should update editForm', () => {
       const userProfile: IUserProfile = { id: 456 };
+      const user: IUser = { id: 26285 };
+      userProfile.user = user;
       const cards: ICharacterCard = { id: 10754 };
       userProfile.cards = [cards];
 
       activatedRoute.data = of({ userProfile });
       comp.ngOnInit();
 
+      expect(comp.usersSharedCollection).toContain(user);
       expect(comp.characterCardsSharedCollection).toContain(cards);
       expect(comp.userProfile).toEqual(userProfile);
     });
@@ -153,6 +183,16 @@ describe('UserProfile Management Update Component', () => {
   });
 
   describe('Compare relationships', () => {
+    describe('compareUser', () => {
+      it('Should forward to userService', () => {
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
+        jest.spyOn(userService, 'compareUser');
+        comp.compareUser(entity, entity2);
+        expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);
+      });
+    });
+
     describe('compareCharacterCard', () => {
       it('Should forward to characterCardService', () => {
         const entity = { id: 123 };

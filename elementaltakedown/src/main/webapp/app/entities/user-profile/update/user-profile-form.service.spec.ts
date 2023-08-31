@@ -21,6 +21,7 @@ describe('UserProfile Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             name: expect.any(Object),
+            user: expect.any(Object),
             cards: expect.any(Object),
           })
         );
@@ -33,6 +34,7 @@ describe('UserProfile Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             name: expect.any(Object),
+            user: expect.any(Object),
             cards: expect.any(Object),
           })
         );

@@ -44,6 +44,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="user.login">
+            <div class="d-flex">
+              <span jhiTranslate="elementaltakedownApp.userProfile.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="cards.name">
             <div class="d-flex">
               <span jhiTranslate="elementaltakedownApp.userProfile.cards">Cards</span>
@@ -59,6 +65,9 @@
             <a [routerLink]="['/user-profile', userProfile.id, 'view']">{{ userProfile.id }}</a>
           </td>
           <td>{{ userProfile.name }}</td>
+          <td>
+            {{ userProfile.user?.login }}
+          </td>
           <td>
             <span *ngFor="let cards of userProfile.cards; let last = last">
               <a class="form-control-static" [routerLink]="['/character-card', cards.id, 'view']">{{ cards.name }}</a

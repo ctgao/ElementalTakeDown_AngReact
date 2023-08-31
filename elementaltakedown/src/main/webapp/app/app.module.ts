@@ -46,7 +46,6 @@ import { ErrorComponent } from './layouts/error/error.component';
     httpInterceptorProviders,
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
-//   declarations: [MainComponent, NavbarComponent, ErrorComponent, ActiveMenuDirective, FooterComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {

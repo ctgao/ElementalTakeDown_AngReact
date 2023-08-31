@@ -18,6 +18,10 @@
         <dd>
           <span>{{ userProfile.name }}</span>
         </dd>
+        <dt><span jhiTranslate="elementaltakedownApp.userProfile.user">User</span></dt>
+        <dd>
+          <span>{{ userProfile.user?.login }}</span>
+        </dd>
         <dt><span jhiTranslate="elementaltakedownApp.userProfile.cards">Cards</span></dt>
         <dd>
           <span *ngFor="let cards of userProfile.cards; let last = last">
