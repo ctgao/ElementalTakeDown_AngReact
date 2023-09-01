@@ -12,7 +12,7 @@ We need re-modify a couple of things.
         }
         return this.dmgElement.getValue() + this.dmgValue;
     }
-3. Run the SQL commands through the browser-based database in JHipster UI found on Drive.
+----3. Run the SQL commands through the browser-based database in JHipster UI found on Drive.----
    (OR)
 4. ./mvnw liquibase:diff
 
