@@ -1,5 +1,6 @@
 package ctgao.passion.elementaltakedown.service;
 
+import ctgao.passion.elementaltakedown.domain.CharacterCard;
 import ctgao.passion.elementaltakedown.domain.User;
 import ctgao.passion.elementaltakedown.domain.UserProfile;
 import ctgao.passion.elementaltakedown.repository.UserProfileRepository;
@@ -12,8 +13,10 @@ import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
@@ -75,5 +78,14 @@ public class UserProfileService {
     private UserProfileDTO createEmptyProfile(User user) {
         UserProfile profile = userProfileRepository.save(mapper.userToNewProfile(user));
         return mapper.userProfileToProfileDTO(profile);
+    }
+
+    public UserProfile updateProfile(UserProfileDTO profileDTO, List<CharacterCard> cards) {
+        profileDTO.setCards(new LinkedHashSet<>(cards));
+        UserProfile prof = mapper.profileDTOToUserProfile(profileDTO);
+        prof.setUser(userRepository.findOneByLogin(profileDTO.getLogin()).get());
+        prof.setName(userProfileRepository.findById(prof.getId()).get().getName());
+        return userProfileRepository.save(prof);
+//        return null;
     }
 }

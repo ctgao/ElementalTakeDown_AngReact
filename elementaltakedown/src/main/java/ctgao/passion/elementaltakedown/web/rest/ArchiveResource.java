@@ -2,21 +2,24 @@ package ctgao.passion.elementaltakedown.web.rest;
 
 import ctgao.passion.elementaltakedown.config.Constants;
 import ctgao.passion.elementaltakedown.domain.CharacterCard;
+import ctgao.passion.elementaltakedown.domain.UserProfile;
 import ctgao.passion.elementaltakedown.service.UserProfileService;
 import ctgao.passion.elementaltakedown.service.dto.UserProfileDTO;
+import ctgao.passion.elementaltakedown.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import tech.jhipster.web.util.HeaderUtil;
 
 import javax.validation.constraints.Pattern;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * REST controller for managing {@link ctgao.passion.elementaltakedown.domain.UserProfile}.
@@ -40,7 +43,7 @@ public class ArchiveResource {
     }
 
     /**
-     * {@code GET  /user-profiles/:login} : get the "logged in" user, get the associate "user profile", then return the list of cards
+     * {@code GET /character-cards/archive/:login} : get the "logged in" user, get the associate "user profile", then return the list of cards
      * @param login the login of the User to retrieve their userProfile.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the userProfile, or with status {@code 404 (Not Found)}.
      */
@@ -53,5 +56,28 @@ public class ArchiveResource {
             return new ArrayList<>(profileDTO.getCards());
         }
         return new ArrayList<>();
+    }
+
+    /**
+     * {@code PUT /character-cards/archive/:login} : get the "logged in" user, update the associated "user profile"
+     * @param login the login of the User to retrieve their userProfile.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the userProfile, or with status {@code 404 (Not Found)}.
+     */
+    @PutMapping("/{login}")
+    public ResponseEntity<UserProfile> updateCardsOwned(
+        @PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login,
+        @RequestBody List<CharacterCard> characterCards
+    ) throws URISyntaxException {
+        log.debug("REST request to get User : {}", login);
+        UserProfileDTO profileDTO = userService.getProfileByLogin(login);
+        if(profileDTO == null) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        UserProfile result = userService.updateProfile(profileDTO, characterCards);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 }
