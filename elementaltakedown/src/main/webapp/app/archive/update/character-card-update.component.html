@@ -6,7 +6,7 @@
         id="jhi-character-card-heading"
         data-cy="CharacterCardCreateUpdateHeading"
       >
-        Add a Character Card to your Collection!
+        Add Character Card(s) to your Collection
       </h2>
 
       <div>
@@ -16,35 +16,32 @@
       <div class="table-responsive table-entities" id="entities" *ngIf="allCharacters && allCharacters.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
           <thead>
-          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
-            <th scope="col" jhiSortBy="id">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="name">
-              <div class="d-flex">
-                <span>Character Name</span>
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-          </tr>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+              <th scope="col">
+                <div class="d-flex">
+                  <span>Character Name</span>
+                </div>
+              </th>
+              <th>
+                <div class="d-flex">
+                  <span>All Character Cards</span>
+                </div>
+              </th>
+            </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let allCharacters of allCharacters; trackBy: trackId" data-cy="entityTable">
-            <td>
-              <a [routerLink]="['/character-card', allCharacters.id, 'view']">{{ allCharacters.id }}</a>
-            </td>
-            <td>{{ allCharacters.name }}</td>
-          </tr>
+            <tr *ngFor="let allCharacters of allCharacters; trackBy: trackId" data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/character-card', allCharacters.id, 'view']">{{ allCharacters.name }}</a>
+              </td>
+              <td>
+                <input type="checkbox" id="{{allCharacters.id}}" checked="{{allCharacters.playerHasCard}}">
+                <label for="{{allCharacters.id}}">{{ allCharacters.name }}</label>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
-
-<!--      <script src="cardslist.js"></script>-->
-
-      <div id="cards-checklist"></div>
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">

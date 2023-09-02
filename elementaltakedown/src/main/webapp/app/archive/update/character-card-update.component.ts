@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
-import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
+import { combineLatest, filter, Observable, switchMap, tap, forkJoin } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -9,6 +9,7 @@ import { ICharacterCard } from '../character-card.model';
 import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, ArchiveService } from '../service/character-card.service';
 import { SortService } from 'app/shared/sort/sort.service';
+import { IArchiveCard } from '../archive.model';
 
 // import { UserProfileFormService, UserProfileFormGroup } from 'app/entities/user-profile/user-profile-form.service';
 // import { IUserProfile } from 'app/entities/user-profile/user-profile.model';
@@ -26,116 +27,16 @@ import { Account } from 'app/core/auth/account.model';
   templateUrl: './character-card-update.component.html',
 })
 export class CharacterCardUpdateComponent implements OnInit {
-//   isSaving = false;
-//   isLoading = false;
-//   account: Account | null = null;
-//
-  predicate = 'id';
-  ascending = true;
-//
-//   allCharacters?: ICharacterCard[];
-//   characterCards?: ICharacterCard[];
-//
-//
-//   constructor(
-//     protected characterCardService: ArchiveService,
-//     protected activatedRoute: ActivatedRoute,
-//     public router: Router,
-//     protected sortService: SortService,
-//     private accountService: AccountService,
-//     protected modalService: NgbModal
-//   ) {}
-//
-// //   compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);
-// //
-// //   compareCharacterCard = (o1: ICharacterCard | null, o2: ICharacterCard | null): boolean =>
-// //     this.characterCardService.compareCharacterCard(o1, o2);
-//
-//   trackId = (_index: number, item: ICharacterCard): number => this.characterCardService.getCharacterCardIdentifier(item);
-//
-//   ngOnInit(): void {
-//     this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
-//     this.loadAll();
-// //     this.loadMine();
-//   }
-//
-//   loadAll(): void {
-//     this.loadAllFromBackendWithRouteInformations().subscribe({
-//       next: (res: EntityArrayResponseType) => {
-//         this.onResponseSuccessAll(res);
-//       },
-//     });
-//   }
-//
-//   navigateToWithComponentValues(): void {
-//     this.handleNavigation(this.predicate, this.ascending);
-//   }
-//
-//   protected loadAllFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
-//     console.log(this.activatedRoute);
-//     return combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
-//       tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
-//       switchMap(() => this.queryBackend(false, this.predicate, this.ascending))
-//     );
-//   }
-//
-//   protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
-//     console.log(params);
-//     console.log(data);
-//     const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
-//     this.predicate = sort[0];
-//     this.ascending = sort[1] === ASC;
-//   }
-//
-//   protected onResponseSuccessAll(response: EntityArrayResponseType): void {
-//     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-//     this.allCharacters = this.refineData(dataFromBody);
-//   }
-//
-//   protected refineData(data: ICharacterCard[]): ICharacterCard[] {
-//     return data.sort(this.sortService.startSort(this.predicate, this.ascending ? 1 : -1));
-//   }
-//
-//   protected fillComponentAttributesFromResponseBody(data: ICharacterCard[] | null): ICharacterCard[] {
-//     return data ?? [];
-//   }
-//
-//   protected queryBackend(loggedin: boolean, predicate?: string, ascending?: boolean): Observable<EntityArrayResponseType> {
-//     this.isLoading = true;
-//     const queryObject = {
-//       eagerload: true,
-//       sort: this.getSortQueryParam(predicate, ascending),
-//     };
-//     const loginToFind = this.account ? this.account.login : "";
-//     const youLoggin = loggedin ? loginToFind : "";
-//     return this.characterCardService.query(youLoggin, queryObject).pipe(tap(() => (this.isLoading = false)));
-//   }
-//
-//   protected handleNavigation(predicate?: string, ascending?: boolean): void {
-//     const queryParamsObj = {
-//       sort: this.getSortQueryParam(predicate, ascending),
-//     };
-//
-//     this.router.navigate(['./'], {
-//       relativeTo: this.activatedRoute,
-//       queryParams: queryParamsObj,
-//     });
-//   }
-//
-//   protected getSortQueryParam(predicate = this.predicate, ascending = this.ascending): string[] {
-//     const ascendingQueryParam = ascending ? ASC : DESC;
-//     if (predicate === '') {
-//       return [];
-//     } else {
-//       return [predicate + ',' + ascendingQueryParam];
-//     }
-//   }
-
   isSaving = false;
-//   userProfile: IUserProfile | null = null;
   account: Account | null = null;
 
-  allCharacters: ICharacterCard[] = [];
+  predicate = 'id';
+  ascending = true;
+
+  allCharacters?: IArchiveCard[];
+//   characterCards?: ICharacterCard[];
+
+//   userProfile: IUserProfile | null = null;
 
 //   editForm: UserProfileFormGroup = this.userProfileFormService.createUserProfileFormGroup();
 
@@ -212,9 +113,24 @@ export class CharacterCardUpdateComponent implements OnInit {
   protected loadRelationshipsOptions(): void {
     const loginToFind = this.account ? this.account.login : "";
 
-    this.characterCardService
-      .query("")
-      .pipe(map((res: HttpResponse<ICharacterCard[]>) => res.body ?? []))
-      .subscribe((characterCards: ICharacterCard[]) => (this.allCharacters = characterCards));
+    forkJoin(
+      this.characterCardService
+        .query("")
+        .pipe(map((res: HttpResponse<ICharacterCard[]>) => res.body ?? []))
+//         .subscribe((characterCards: ICharacterCard[]) => (this.allCharacters = characterCards)),
+      , this.characterCardService
+        .query(loginToFind)
+        .pipe(map((res: HttpResponse<ICharacterCard[]>) => res.body ?? []))
+//         .pipe((cards: ICharacterCard[]) => cards.map(a => a.id))
+//         .subscribe((characterCards: ICharacterCard[]) => (this.characterCards = characterCards))
+      ).subscribe(([allCards, myCards]: [ICharacterCard[], ICharacterCard[]]) => {
+        this.allCharacters = allCards;
+        let ownedCards = myCards.map(a => a.id);
+
+        for(let i = 0; i < allCards.length; i++){
+          this.allCharacters[i].playerHasCard = ownedCards.includes(allCards[i].id) ? "true" : '';
+//           console.log(this.allCharacters[i].playerHasCard);
+        }
+      })
   }
 }
