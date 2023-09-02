@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ICharacterCard, NewCharacterCard } from '../character-card.model';
+import { IArchiveCard } from '../archive.model';
 
 /**
  * A partial Type with required key is used as form input.
@@ -12,74 +13,47 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  * Type for createFormGroup and resetForm argument.
  * It accepts ICharacterCard for edit and NewCharacterCardFormGroupInput for create.
  */
-type CharacterCardFormGroupInput = ICharacterCard | PartialWithRequiredKeyOf<NewCharacterCard>;
+// type CharacterCardFormGroupInput = ICharacterCard | PartialWithRequiredKeyOf<NewCharacterCard>;
+//
+// type CharacterCardFormDefaults = Pick<NewCharacterCard, 'id' | 'owners'>;
 
-type CharacterCardFormDefaults = Pick<NewCharacterCard, 'id' | 'owners'>;
+// type CharacterCardFormGroupContent = {
+//   id: FormControl<ICharacterCard['id'] | NewCharacterCard['id']>;
+//   name: FormControl<ICharacterCard['name']>;
+//   element: FormControl<ICharacterCard['element']>;
+//   basic: FormControl<ICharacterCard['basic']>;
+//   skill: FormControl<ICharacterCard['skill']>;
+//   ultimate: FormControl<ICharacterCard['ultimate']>;
+//   owners: FormControl<ICharacterCard['owners']>;
+// };
 
-type CharacterCardFormGroupContent = {
-  id: FormControl<ICharacterCard['id'] | NewCharacterCard['id']>;
-  name: FormControl<ICharacterCard['name']>;
-  element: FormControl<ICharacterCard['element']>;
-  basic: FormControl<ICharacterCard['basic']>;
-  skill: FormControl<ICharacterCard['skill']>;
-  ultimate: FormControl<ICharacterCard['ultimate']>;
-  owners: FormControl<ICharacterCard['owners']>;
-};
-
-export type CharacterCardFormGroup = FormGroup<CharacterCardFormGroupContent>;
+// export type CharacterCardFormGroup = FormGroup<CharacterCardFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
-export class CharacterCardFormService {
-  createCharacterCardFormGroup(characterCard: CharacterCardFormGroupInput = { id: null }): CharacterCardFormGroup {
-    const characterCardRawValue = {
-      ...this.getFormDefaults(),
-      ...characterCard,
-    };
-    return new FormGroup<CharacterCardFormGroupContent>({
-      id: new FormControl(
-        { value: characterCardRawValue.id, disabled: true },
-        {
-          nonNullable: true,
-          validators: [Validators.required],
+export class ArchiveFormService {
+
+    getCheckedCardsOnly(allCards: IArchiveCard[] = []){
+      var markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
+      var checkedCards: number[] = [];
+
+      for(let i = 0; i < markedCheckbox.length; i++){
+        checkedCards.push(parseInt(markedCheckbox[i].id));
+      }
+      var returnCards: ICharacterCard[] = [];
+
+      for(let i = 0; i < allCards.length; i++){
+        if(checkedCards.includes(allCards[i].id)){
+          returnCards.push(this.convertToICard(allCards[i]));
         }
-      ),
-      name: new FormControl(characterCardRawValue.name, {
-        validators: [Validators.required],
-      }),
-      element: new FormControl(characterCardRawValue.element, {
-        validators: [Validators.required],
-      }),
-      basic: new FormControl(characterCardRawValue.basic, {
-        validators: [Validators.required],
-      }),
-      skill: new FormControl(characterCardRawValue.skill, {
-        validators: [Validators.required],
-      }),
-      ultimate: new FormControl(characterCardRawValue.ultimate, {
-        validators: [Validators.required],
-      }),
-      owners: new FormControl(characterCardRawValue.owners ?? []),
-    });
-  }
+      }
+//       for(let i = 0; i < returnCards.length; i++){
+//         console.log(returnCards[i]);
+//       }
+      return returnCards;
+    }
 
-  getCharacterCard(form: CharacterCardFormGroup): ICharacterCard | NewCharacterCard {
-    return form.getRawValue() as ICharacterCard | NewCharacterCard;
-  }
-
-  resetForm(form: CharacterCardFormGroup, characterCard: CharacterCardFormGroupInput): void {
-    const characterCardRawValue = { ...this.getFormDefaults(), ...characterCard };
-    form.reset(
-      {
-        ...characterCardRawValue,
-        id: { value: characterCardRawValue.id, disabled: true },
-      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */
-    );
-  }
-
-  private getFormDefaults(): CharacterCardFormDefaults {
-    return {
-      id: null,
-      owners: [],
-    };
-  }
+    convertToICard(singleCard: IArchiveCard): ICharacterCard{
+      delete singleCard.playerHasCard;
+      return singleCard;
+    }
 }
