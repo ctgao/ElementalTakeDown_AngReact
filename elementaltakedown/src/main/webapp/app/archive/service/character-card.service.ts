@@ -15,7 +15,6 @@ export type EntityArrayResponseType = HttpResponse<ICharacterCard[]>;
 @Injectable({ providedIn: 'root' })
 export class CharacterCardService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/character-cards');
-  protected archiveResourceUrl = this.applicationConfigService.getEndpointFor('archive');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -47,7 +46,7 @@ export class CharacterCardService {
       return this.http.get<ICharacterCard[]>(`${this.resourceUrl}`, { params: options, observe: 'response' });
     }
     else{
-      return this.http.get<ICharacterCard[]>(`${this.archiveResourceUrl}/${login}`, { params: options, observe: 'response' });
+      return this.http.get<ICharacterCard[]>(`${this.resourceUrl}/archive/${login}`, { params: options, observe: 'response' });
     }
   }
 

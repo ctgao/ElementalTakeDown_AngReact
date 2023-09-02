@@ -6,7 +6,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ICharacterCard } from '../character-card.model';
 import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, CharacterCardService } from '../service/character-card.service';
-import { CharacterCardDeleteDialogComponent } from '../delete/character-card-delete-dialog.component';
 import { SortService } from 'app/shared/sort/sort.service';
 
 import { AccountService } from 'app/core/auth/account.service';
@@ -41,21 +40,21 @@ export class CharacterCardComponent implements OnInit {
 //     console.log(this.account);
   }
 
-  delete(characterCard: ICharacterCard): void {
-    const modalRef = this.modalService.open(CharacterCardDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.characterCard = characterCard;
-    // unsubscribe not needed because closed completes on modal close
-    modalRef.closed
-      .pipe(
-        filter(reason => reason === ITEM_DELETED_EVENT),
-        switchMap(() => this.loadFromBackendWithRouteInformations())
-      )
-      .subscribe({
-        next: (res: EntityArrayResponseType) => {
-          this.onResponseSuccess(res);
-        },
-      });
-  }
+//   delete(characterCard: ICharacterCard): void {
+//     const modalRef = this.modalService.open(CharacterCardDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+//     modalRef.componentInstance.characterCard = characterCard;
+//     // unsubscribe not needed because closed completes on modal close
+//     modalRef.closed
+//       .pipe(
+//         filter(reason => reason === ITEM_DELETED_EVENT),
+//         switchMap(() => this.loadFromBackendWithRouteInformations())
+//       )
+//       .subscribe({
+//         next: (res: EntityArrayResponseType) => {
+//           this.onResponseSuccess(res);
+//         },
+//       });
+//   }
 
   load(): void {
     this.loadFromBackendWithRouteInformations().subscribe({
