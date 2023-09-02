@@ -5,11 +5,11 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { ICharacterCard } from '../character-card.model';
-import { CharacterCardService } from '../service/character-card.service';
+import { ArchiveService } from '../service/character-card.service';
 
 @Injectable({ providedIn: 'root' })
 export class CharacterCardRoutingResolveService implements Resolve<ICharacterCard | null> {
-  constructor(protected service: CharacterCardService, protected router: Router) {}
+  constructor(protected service: ArchiveService, protected router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<ICharacterCard | null | never> {
     const id = route.params['id'];
