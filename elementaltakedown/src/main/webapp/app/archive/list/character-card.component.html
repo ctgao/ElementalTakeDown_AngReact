@@ -77,30 +77,38 @@
       <tbody>
         <tr *ngFor="let characterCard of characterCards; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/character-card', characterCard.id, 'view']">{{ characterCard.id }}</a>
+<!--            <a [routerLink]="['/character-card', characterCard.id, 'view']">-->
+              {{ characterCard.id }}
+<!--            </a>-->
           </td>
           <td>{{ characterCard.name }}</td>
           <td jhiTranslate="{{ 'elementaltakedownApp.ElementType.' + characterCard.element }}">{{ characterCard.element }}</td>
           <td>
             <div *ngIf="characterCard.basic">
-              <a [routerLink]="['/basic-atk', characterCard.basic.id, 'view']">{{ characterCard.basic.name }}</a>
+<!--              <a [routerLink]="['/basic-atk', characterCard.basic.id, 'view']">-->
+                {{ characterCard.basic.name }}
+<!--              </a>-->
             </div>
           </td>
           <td>
             <div *ngIf="characterCard.skill">
-              <a [routerLink]="['/skill-atk', characterCard.skill.id, 'view']">{{ characterCard.skill.name }}</a>
+<!--              <a [routerLink]="['/skill-atk', characterCard.skill.id, 'view']">-->
+                {{ characterCard.skill.name }}
+<!--              </a>-->
             </div>
           </td>
           <td>
             <div *ngIf="characterCard.ultimate">
-              <a [routerLink]="['/ultimate-atk', characterCard.ultimate.id, 'view']">{{ characterCard.ultimate.name }}</a>
+<!--              <a [routerLink]="['/ultimate-atk', characterCard.ultimate.id, 'view']">-->
+                {{ characterCard.ultimate.name }}
+<!--              </a>-->
             </div>
           </td>
           <td class="text-end">
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/character-card', characterCard.id, 'view']"
+                [routerLink]="['/archive', characterCard.id, 'view']"
                 class="btn btn-info btn-sm"
                 data-cy="entityDetailsButton"
               >

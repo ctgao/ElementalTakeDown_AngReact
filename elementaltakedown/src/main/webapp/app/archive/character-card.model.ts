@@ -8,9 +8,9 @@ export interface ICharacterCard {
   id: number;
   name?: string | null;
   element?: ElementType | null;
-  basic?: Pick<IBasicATK, 'id' | 'name'> | null;
-  skill?: Pick<ISkillATK, 'id' | 'name'> | null;
-  ultimate?: Pick<IUltimateATK, 'id' | 'name'> | null;
+  basic?: Pick<IBasicATK, 'id' | 'name' | 'description' > | null;
+  skill?: Pick<ISkillATK, 'id' | 'name' | 'description' > | null;
+  ultimate?: Pick<IUltimateATK, 'id' | 'name' | 'description' | 'requiredEnergy' > | null;
   owners?: Pick<IUserProfile, 'id'>[] | null;
 }
 
