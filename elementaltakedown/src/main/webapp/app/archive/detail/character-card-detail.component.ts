@@ -16,6 +16,10 @@ export class CharacterCardDetailComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ characterCard }) => {
       this.characterCard = characterCard;
 //       console.log(this.characterCard);
+//       const charaElemen = document.getElementById("colored-element");
+//       if(charaElemen){
+//         charaElemen.style.color = "#DC2A2A";
+//       }
     });
   }
 
