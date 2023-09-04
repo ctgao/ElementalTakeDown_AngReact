@@ -1,37 +1,14 @@
 // Override Boostrap variables
-@import '~bootswatch/dist/lux/variables';
 // Import Bootstrap source files from node_modules
 @import '~bootstrap/scss/bootstrap';
-@import '~bootswatch/dist/lux/bootswatch';
 body {
+  background: #fafafa;
   margin: 0;
 }
 
 a {
   color: #533f03;
   font-weight: bold;
-}
-
-.FIRE {
-    color: #DC2A2A;
-}
-.WATER {
-    color: #1100FF;
-}
-.ICE {
-    color: #00F7FF;
-}
-.EARTH {
-    color: #FFCD00;
-}
-.ELECTRIC {
-    color: #AB00FF;
-}
-.PLANT {
-    color: #2dfc46;
-}
-.WIND {
-    color: #57ffb9;
 }
 
 * {
