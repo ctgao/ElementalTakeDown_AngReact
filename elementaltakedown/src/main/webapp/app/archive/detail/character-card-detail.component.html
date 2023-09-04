@@ -22,27 +22,29 @@
         </dd>
         <dt><span jhiTranslate="elementaltakedownApp.characterCard.element">Element</span></dt>
         <dd>
-          <span jhiTranslate="{{ 'elementaltakedownApp.ElementType.' + characterCard.element }}">{{ characterCard.element }}</span>
+          <div class={{characterCard.element}}><span jhiTranslate="{{ 'elementaltakedownApp.ElementType.' + characterCard.element }}">
+            {{ characterCard.element }}
+          </span></div>
         </dd>
         <dt><span jhiTranslate="elementaltakedownApp.characterCard.basic">Basic</span></dt>
         <dd>
           <div *ngIf="characterCard.basic">
             {{ characterCard.basic.name }} <br>
-            <em>{{ characterCard.basic.description }}</em>
+            <em style="padding-left: 20px;">{{ characterCard.basic.description }}</em>
           </div>
         </dd>
         <dt><span jhiTranslate="elementaltakedownApp.characterCard.skill">Skill</span></dt>
         <dd>
           <div *ngIf="characterCard.skill">
             {{ characterCard.skill.name }} <br>
-            <em>{{ characterCard.skill.description }}</em>
+            <em style="padding-left: 20px;">{{ characterCard.skill.description }}</em>
           </div>
         </dd>
         <dt><span jhiTranslate="elementaltakedownApp.characterCard.ultimate">Ultimate</span></dt>
         <dd>
           <div *ngIf="characterCard.ultimate">
             {{ characterCard.ultimate.name }} <br>
-            <em>Costs {{ characterCard.ultimate.requiredEnergy }} energy; {{ characterCard.ultimate.description }}</em>
+            <em style="padding-left: 20px;">Costs {{ characterCard.ultimate.requiredEnergy }} energy; {{ characterCard.ultimate.description }}</em>
           </div>
         </dd>
       </dl>
