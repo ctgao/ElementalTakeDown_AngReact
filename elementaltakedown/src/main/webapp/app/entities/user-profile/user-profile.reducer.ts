@@ -19,7 +19,7 @@ const apiUrl = 'api/user-profiles';
 // Actions
 
 export const getEntities = createAsyncThunk('userProfile/fetch_entity_list', async ({ page, size, sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}?cacheBuster=${new Date().getTime()}`;
+  const requestUrl = `${apiUrl}?cacheBuster=${new Date().getTime()}?eagerload=true`;
   return axios.get<IUserProfile[]>(requestUrl);
 });
 

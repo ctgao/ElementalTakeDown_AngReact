@@ -33,3 +33,4 @@ We need re-modify a couple of things.
 4. ./mvnw liquibase:diff
 
 https://www.jhipster.tech/development/
+https://github.com/jhipster/generator-jhipster/issues/10143
