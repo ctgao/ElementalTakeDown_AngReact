@@ -1,12 +1,8 @@
 package ctgao.passion.elementaltakedown.service.mapper;
 
-import ctgao.passion.elementaltakedown.domain.Authority;
-import ctgao.passion.elementaltakedown.domain.UserProfile;
-import ctgao.passion.elementaltakedown.service.UserProfileService;
-import ctgao.passion.elementaltakedown.service.dto.UserProfileDTO;
-import java.util.*;
-import java.util.stream.Collectors;
 import ctgao.passion.elementaltakedown.domain.User;
+import ctgao.passion.elementaltakedown.domain.UserProfile;
+import ctgao.passion.elementaltakedown.service.dto.UserProfileDTO;
 import org.springframework.stereotype.Service;
 
 /**
