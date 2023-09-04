@@ -35,7 +35,7 @@
                 <a [routerLink]="['/character-card', allCharacters.id, 'view']">{{ allCharacters.name }}</a>
               </td>
               <td>
-                <input type="checkbox" id="{{allCharacters.id}}" checked="{{allCharacters.playerHasCard}}">
+                <input type="checkbox" id="{{allCharacters.id}}" class="cardCheckBoxes" checked="{{allCharacters.playerHasCard}}">
                 <label for="{{allCharacters.id}}">{{ allCharacters.name }}</label>
               </td>
             </tr>

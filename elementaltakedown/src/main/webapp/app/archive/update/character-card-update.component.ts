@@ -11,12 +11,9 @@ import { EntityArrayResponseType, ArchiveService } from '../service/character-ca
 import { SortService } from 'app/shared/sort/sort.service';
 import { IArchiveCard } from '../archive.model';
 
-// import { UserProfileFormService, UserProfileFormGroup } from 'app/entities/user-profile/user-profile-form.service';
-// import { IUserProfile } from 'app/entities/user-profile/user-profile.model';
+import { ArchiveFormService } from './character-card-form.service';
+import { IUserProfile } from 'app/entities/user-profile/user-profile.model';
 // import { UserProfileService } from 'app/entities/user-profile/service/user-profile.service';
-// import { IUser } from 'app/entities/user/user.model';
-// import { UserService } from 'app/entities/user/user.service';
-// import { ICharacterCard } from '../character-card.model';
 // import { EntityArrayResponseType, CharacterCardService } from '../service/character-card.service';
 
 import { AccountService } from 'app/core/auth/account.service';
@@ -34,7 +31,6 @@ export class CharacterCardUpdateComponent implements OnInit {
   ascending = true;
 
   allCharacters?: IArchiveCard[];
-//   characterCards?: ICharacterCard[];
 
 //   userProfile: IUserProfile | null = null;
 
@@ -42,7 +38,7 @@ export class CharacterCardUpdateComponent implements OnInit {
 
   constructor(
 //     protected userProfileService: UserProfileService,
-//     protected userProfileFormService: UserProfileFormService,
+    protected userProfileFormService: ArchiveFormService,
     private accountService: AccountService,
     protected characterCardService: ArchiveService,
     protected activatedRoute: ActivatedRoute
@@ -50,20 +46,10 @@ export class CharacterCardUpdateComponent implements OnInit {
 
   trackId = (_index: number, item: ICharacterCard): number => this.characterCardService.getCharacterCardIdentifier(item);
 
-  compareCharacterCard = (o1: ICharacterCard | null, o2: ICharacterCard | null): boolean =>
-    this.characterCardService.compareCharacterCard(o1, o2);
-
   ngOnInit(): void {
     this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
 
-//     this.activatedRoute.data.subscribe(({ userProfile }) => {
-//       this.userProfile = userProfile;
-//       if (userProfile) {
-//         this.updateForm(userProfile);
-//       }
-
-      this.loadRelationshipsOptions();
-//     });
+    this.loadRelationshipsOptions();
   }
 
   previousState(): void {
@@ -72,21 +58,18 @@ export class CharacterCardUpdateComponent implements OnInit {
 
   save(): void {
     console.log("saving");
-//     this.isSaving = true;
-//     const userProfile = this.userProfileFormService.getUserProfile(this.editForm);
-//     if (userProfile.id !== null) {
-//       this.subscribeToSaveResponse(this.userProfileService.update(userProfile));
-//     } else {
-//       this.subscribeToSaveResponse(this.userProfileService.create(userProfile));
-//     }
+    this.isSaving = true;
+    var cardsToUpdate = this.userProfileFormService.getCheckedCardsOnly(this.allCharacters);
+    const loginToFind = this.account ? this.account.login : "";
+    this.subscribeToSaveResponse(this.characterCardService.update(loginToFind, cardsToUpdate));
   }
 
-//   protected subscribeToSaveResponse(result: Observable<HttpResponse<IUserProfile>>): void {
-//     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-//       next: () => this.onSaveSuccess(),
-//       error: () => this.onSaveError(),
-//     });
-//   }
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IUserProfile>>): void {
+    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
+      next: () => this.onSaveSuccess(),
+      error: () => this.onSaveError(),
+    });
+  }
 
   protected onSaveSuccess(): void {
     this.previousState();
@@ -100,16 +83,6 @@ export class CharacterCardUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-//   protected updateForm(userProfile: IUserProfile): void {
-//     this.userProfile = userProfile;
-//     this.userProfileFormService.resetForm(this.editForm, userProfile);
-
-//     this.characterCardsSharedCollection = this.characterCardService.addCharacterCardToCollectionIfMissing<ICharacterCard>(
-//       this.characterCardsSharedCollection,
-//       ...(userProfile.cards ?? [])
-//     );
-//   }
-
   protected loadRelationshipsOptions(): void {
     const loginToFind = this.account ? this.account.login : "";
 
@@ -117,19 +90,15 @@ export class CharacterCardUpdateComponent implements OnInit {
       this.characterCardService
         .query("")
         .pipe(map((res: HttpResponse<ICharacterCard[]>) => res.body ?? []))
-//         .subscribe((characterCards: ICharacterCard[]) => (this.allCharacters = characterCards)),
       , this.characterCardService
         .query(loginToFind)
         .pipe(map((res: HttpResponse<ICharacterCard[]>) => res.body ?? []))
-//         .pipe((cards: ICharacterCard[]) => cards.map(a => a.id))
-//         .subscribe((characterCards: ICharacterCard[]) => (this.characterCards = characterCards))
       ).subscribe(([allCards, myCards]: [ICharacterCard[], ICharacterCard[]]) => {
         this.allCharacters = allCards;
         let ownedCards = myCards.map(a => a.id);
 
         for(let i = 0; i < allCards.length; i++){
           this.allCharacters[i].playerHasCard = ownedCards.includes(allCards[i].id) ? "true" : '';
-//           console.log(this.allCharacters[i].playerHasCard);
         }
       })
   }

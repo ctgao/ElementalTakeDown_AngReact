@@ -6,10 +6,12 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { ICharacterCard, NewCharacterCard } from '../character-card.model';
+import { IUserProfile } from 'app/entities/user-profile/user-profile.model';
 
 export type PartialUpdateCharacterCard = Partial<ICharacterCard> & Pick<ICharacterCard, 'id'>;
 
 export type EntityResponseType = HttpResponse<ICharacterCard>;
+export type EntityProfileResponseType = HttpResponse<IUserProfile>;
 export type EntityArrayResponseType = HttpResponse<ICharacterCard[]>;
 
 @Injectable({ providedIn: 'root' })
@@ -18,18 +20,8 @@ export class ArchiveService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(characterCard: NewCharacterCard): Observable<EntityResponseType> {
-    return this.http.post<ICharacterCard>(this.resourceUrl, characterCard, { observe: 'response' });
-  }
-
-  update(characterCard: ICharacterCard): Observable<EntityResponseType> {
-    return this.http.put<ICharacterCard>(`${this.resourceUrl}/${this.getCharacterCardIdentifier(characterCard)}`, characterCard, {
-      observe: 'response',
-    });
-  }
-
-  partialUpdate(characterCard: PartialUpdateCharacterCard): Observable<EntityResponseType> {
-    return this.http.patch<ICharacterCard>(`${this.resourceUrl}/${this.getCharacterCardIdentifier(characterCard)}`, characterCard, {
+  update(login: string, characterCards: ICharacterCard[]): Observable<EntityProfileResponseType> {
+    return this.http.put<IUserProfile>(`${this.resourceUrl}/archive/${login}`, characterCards, {
       observe: 'response',
     });
   }
@@ -38,7 +30,7 @@ export class ArchiveService {
     return this.http.get<ICharacterCard>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-// is it this???
+// THIS IS THE MAIN GET FUNCTION
   query(login: string, req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
 
@@ -50,37 +42,7 @@ export class ArchiveService {
     }
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
-  }
-
   getCharacterCardIdentifier(characterCard: Pick<ICharacterCard, 'id'>): number {
     return characterCard.id;
-  }
-
-  compareCharacterCard(o1: Pick<ICharacterCard, 'id'> | null, o2: Pick<ICharacterCard, 'id'> | null): boolean {
-    return o1 && o2 ? this.getCharacterCardIdentifier(o1) === this.getCharacterCardIdentifier(o2) : o1 === o2;
-  }
-
-  addCharacterCardToCollectionIfMissing<Type extends Pick<ICharacterCard, 'id'>>(
-    characterCardCollection: Type[],
-    ...characterCardsToCheck: (Type | null | undefined)[]
-  ): Type[] {
-    const characterCards: Type[] = characterCardsToCheck.filter(isPresent);
-    if (characterCards.length > 0) {
-      const characterCardCollectionIdentifiers = characterCardCollection.map(
-        characterCardItem => this.getCharacterCardIdentifier(characterCardItem)!
-      );
-      const characterCardsToAdd = characterCards.filter(characterCardItem => {
-        const characterCardIdentifier = this.getCharacterCardIdentifier(characterCardItem);
-        if (characterCardCollectionIdentifiers.includes(characterCardIdentifier)) {
-          return false;
-        }
-        characterCardCollectionIdentifiers.push(characterCardIdentifier);
-        return true;
-      });
-      return [...characterCardsToAdd, ...characterCardCollection];
-    }
-    return characterCardCollection;
   }
 }
