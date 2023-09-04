@@ -15,6 +15,7 @@ export class CharacterCardDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ characterCard }) => {
       this.characterCard = characterCard;
+//       console.log(this.characterCard);
     });
   }
 

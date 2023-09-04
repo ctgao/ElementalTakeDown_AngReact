@@ -12,10 +12,10 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ characterCard.id }}</span>
-        </dd>
+<!--        <dt><span jhiTranslate="global.field.id">ID</span></dt>-->
+<!--        <dd>-->
+<!--          <span>{{ characterCard.id }}</span>-->
+<!--        </dd>-->
         <dt><span jhiTranslate="elementaltakedownApp.characterCard.name">Name</span></dt>
         <dd>
           <span>{{ characterCard.name }}</span>
@@ -27,19 +27,22 @@
         <dt><span jhiTranslate="elementaltakedownApp.characterCard.basic">Basic</span></dt>
         <dd>
           <div *ngIf="characterCard.basic">
-            <a [routerLink]="['/basic-atk', characterCard.basic.id, 'view']">{{ characterCard.basic.name }}</a>
+            {{ characterCard.basic.name }} <br>
+            <em>{{ characterCard.basic.description }}</em>
           </div>
         </dd>
         <dt><span jhiTranslate="elementaltakedownApp.characterCard.skill">Skill</span></dt>
         <dd>
           <div *ngIf="characterCard.skill">
-            <a [routerLink]="['/skill-atk', characterCard.skill.id, 'view']">{{ characterCard.skill.name }}</a>
+            {{ characterCard.skill.name }} <br>
+            <em>{{ characterCard.skill.description }}</em>
           </div>
         </dd>
         <dt><span jhiTranslate="elementaltakedownApp.characterCard.ultimate">Ultimate</span></dt>
         <dd>
           <div *ngIf="characterCard.ultimate">
-            <a [routerLink]="['/ultimate-atk', characterCard.ultimate.id, 'view']">{{ characterCard.ultimate.name }}</a>
+            {{ characterCard.ultimate.name }} <br>
+            <em>Costs {{ characterCard.ultimate.requiredEnergy }} energy; {{ characterCard.ultimate.description }}</em>
           </div>
         </dd>
       </dl>
@@ -48,9 +51,6 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/character-card', characterCard.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
     </div>
   </div>
 </div>
