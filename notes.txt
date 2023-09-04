@@ -4,13 +4,29 @@ We need re-modify a couple of things.
 1. In SecurityConfig.java, permitAll() for the 'api/**' URL
 2. In Damage.java, replace the getName() function with this:
     public String getName() {
-        if(this.dmgValue < 0){
-            return "Heal" + this.dmgValue;
-        }
         if(this.dmgValue == 0) {
-            return "No Damage";
+            return "Transformative";
         }
-        return this.dmgElement.getValue() + this.dmgValue;
+        StringBuilder sb = new StringBuilder();
+        if(this.dmgValue < 0){
+            sb.append("Heal");
+            sb.append(-1 * this.dmgValue);
+        }
+        else{
+            sb.append(this.dmgElement.getValue());
+            sb.append(this.dmgValue);
+        }
+        if(this.splashDmg != null && this.splashDmg != null && this.splashDmg != 0) {
+            sb.append(" Splash:");
+            if (this.splashDmg < 0) {
+                sb.append("Heal");
+                sb.append(-1 * this.splashDmg);
+            } else {
+                sb.append(this.splashElement.getValue());
+                sb.append(this.splashDmg);
+            }
+        }
+        return sb.toString();
     }
 ----3. Run the SQL commands through the browser-based database in JHipster UI found on Drive.----
    (OR)

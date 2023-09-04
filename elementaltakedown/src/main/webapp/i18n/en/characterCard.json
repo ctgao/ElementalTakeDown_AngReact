@@ -20,7 +20,7 @@
       "id": "ID",
       "name": "Name",
       "element": "Element",
-      "basic": "Basic Attack",
+      "basic": "Basic",
       "skill": "Skill",
       "ultimate": "Ultimate",
       "owners": "Owners"
