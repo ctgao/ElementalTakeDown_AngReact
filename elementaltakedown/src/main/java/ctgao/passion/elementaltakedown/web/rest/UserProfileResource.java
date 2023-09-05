@@ -144,9 +144,10 @@ public class UserProfileResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of userProfiles in body.
      */
     @GetMapping("/user-profiles")
-    public List<UserProfile> getAllUserProfiles(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<UserProfile> getAllUserProfiles(@RequestParam(required = false, defaultValue = "true") boolean eagerload) {
         log.debug("REST request to get all UserProfiles");
         if (eagerload) {
+            log.info("Requested for eagerload");
             return userProfileRepository.findAllWithEagerRelationships();
         } else {
             return userProfileRepository.findAll();
