@@ -86,6 +86,5 @@ public class UserProfileService {
         prof.setUser(userRepository.findOneByLogin(profileDTO.getLogin()).get());
         prof.setName(userProfileRepository.findById(prof.getId()).get().getName());
         return userProfileRepository.save(prof);
-//        return null;
     }
 }
